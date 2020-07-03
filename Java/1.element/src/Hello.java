@@ -13,7 +13,7 @@ public class Hello {
 
         s=sum(i,10); // method 호출
         a='?';
-        // System.out.print()를 사용하면 출력 후 다음줄로 넘어가지 않는다.
+        // System.out.print()를 사용하면 출력 후 다음줄로 넘어가지 않는다
         System.out.println(a);
         System.out.println("Hello");
         System.out.println(s);
