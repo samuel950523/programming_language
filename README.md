@@ -1,5 +1,5 @@
-# programming_language
+# Programming Language
 
-### Java
+### - Java
 
-### Python
+### - Python
