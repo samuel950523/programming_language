@@ -1,5 +1,0 @@
-# Programming Language
-
-### - Java
-
-### - Python
