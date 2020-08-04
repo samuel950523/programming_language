@@ -5,58 +5,34 @@ import java.util.*;
 
 public class BOJ_10814_나이순정렬 {
 	static int n;
-	static String[] strArr;
-	static int[][] ageArr;
-	static String s;
-	// for 정렬
-	static String tmpstr;
-	static int[] tmpage;
-
+	static String[][] arr;
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		// 입력
 		n = Integer.parseInt(br.readLine());
-		strArr = new String[n];
-		ageArr = new int[n][2];
-
+		arr = new String[n][3];
 		for (int i = 0; i < n; i++) {
-			s = br.readLine();
-			StringTokenizer st = new StringTokenizer(s);
-			ageArr[i][0] = Integer.parseInt(st.nextToken());
-			ageArr[i][1] = i;
-			strArr[i] = st.nextToken();
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			arr[i][0] = st.nextToken(); // 나이
+			arr[i][1] = i+""; // 순서
+			arr[i][2] = st.nextToken();
 		}
-
-		// 정렬
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n - i - 1; j++) {
-				// 나이순
-				if (ageArr[j][0] > ageArr[j + 1][0])
-					sort(j);
-				// 나이가 같다면 들어온 순서
-				else if (ageArr[j][0] == ageArr[j + 1][0]) {
-					if (ageArr[j][1] > ageArr[j + 1][1])
-						sort(j);
-				}
-			}
-		}
+		
+		Arrays.sort(arr,new Comparator<String[]>(){
+            @Override
+            public int compare(String[] one, String[] two){
+                return Integer.compare(Integer.parseInt(one[0]),Integer.parseInt(two[0]));
+            }
+        });
+		
 
 		for (int i = 0; i < n; i++) {
-			bw.write(ageArr[i][0] + " " + strArr[i] + "\n");
+			bw.write(arr[i][0] + " "+ arr[i][2] + "\n");
 		}
 		bw.flush();
 		bw.close();
 	}
 
-	static void sort(int j) {
-		tmpage = ageArr[j];
-		ageArr[j] = ageArr[j + 1];
-		ageArr[j + 1] = tmpage;
-
-		tmpstr = strArr[j];
-		strArr[j] = strArr[j + 1];
-		strArr[j + 1] = tmpstr;
-	}
 }

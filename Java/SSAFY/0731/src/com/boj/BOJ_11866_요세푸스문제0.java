@@ -28,6 +28,7 @@ public class BOJ_11866_요세푸스문제0 {
 			else
 				sb.append(q.poll()+", ");
 		}
+		
 		// 출력
 		sb.append(">");
 		System.out.println(sb.toString());
