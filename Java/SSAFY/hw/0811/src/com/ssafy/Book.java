@@ -1,27 +1,24 @@
 package com.ssafy;
 
 public class Book {
-	private String isbn, title, author, publisher;
-	private int price, desc;
-
+	private String isbn;
+	private String title;
+	private String author;
+	private String publisher;
+	private int price;
+	private String desc;
+	
 	public Book() {
-
-	}
-
-	public Book(String isbn, String title, String author, String publisher, int price, int desc) {
 		super();
+	}
+	
+	public Book(String isbn, String title, String author, String publisher, int price, String desc) {
 		this.isbn = isbn;
 		this.title = title;
 		this.author = author;
 		this.publisher = publisher;
 		this.price = price;
 		this.desc = desc;
-	}
-
-	@Override
-	public String toString() {
-		return "Book [isbn=" + isbn + ", title=" + title + ", author=" + author + ", publisher=" + publisher
-				+ ", price=" + price + ", desc=" + desc + "]";
 	}
 
 	public String getIsbn() {
@@ -64,12 +61,17 @@ public class Book {
 		this.price = price;
 	}
 
-	public int getDesc() {
+	public String getDesc() {
 		return desc;
 	}
 
-	public void setDesc(int desc) {
+	public void setDesc(String desc) {
 		this.desc = desc;
 	}
 
+	@Override
+	public String toString() {
+		return "Book [isbn=" + isbn + ", title=" + title + ", author=" + author + ", publisher=" + publisher
+				+ ", price=" + price + ", desc=" + desc + "]";
+	}
 }
