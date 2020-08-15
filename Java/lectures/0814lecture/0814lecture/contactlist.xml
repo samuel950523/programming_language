@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contactlist>
+	<contact>
+        <name>김태희</name>
+        <phone type="mobile">010-111-2222</phone>
+        <email>kth@jaen.kr</email>
+    </contact>
+    <contact>
+        <name>김재환</name>
+        <phone type="mobile">010-222-3333</phone>
+        <email>jjany@swingent.com</email>
+    </contact>
+</contactlist>
