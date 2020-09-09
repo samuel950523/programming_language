@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+    <style>
+        body {
+            margin: 0px 50px;
+            color: midnightblue;
+            font-size: 15px;
+            font-family: 'Ubuntu', Courier, monospace;
+        }
+        
+        div.top-menu {
+            margin: 20px;
+            overflow: hidden;
+            position: fixed;
+            right: 15px;
+            font-weight: 600;
+            width: 100%;
+        }
+        
+        ul.top-links>li {
+            list-style: none;
+            float: right;
+            margin-right: 25px;
+        }
+        
+        ul.top-links>li>a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul.top-links>li>a:hover {
+            color: coral;
+        }
+        
+        div.link-icon1 {
+            float: left;
+            margin-right: 100px;
+        }
+        
+        div.link-icon2 {
+            float: left;
+            margin-right: 100px;
+        }
+        
+        div.title-container {
+            width: 100%;
+            height: 600px;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            padding: 0 64px;
+            z-index: 500;
+        }
+        
+        .caption-container {
+            position: relative;
+            display: inline-block;
+            margin: 0 -1 -1 0;
+            padding: 4px 1.5rem 1rem 4px;
+            font-size: 4rem;
+            font-weight: 600;
+            color: whitesmoke;
+            background-color: midnightblue;
+            letter-spacing: -0.1ch;
+            line-height: 1;
+        }
+        
+        .contents {
+            margin: 0 -1 -1 0;
+            padding: 0 64px;
+            z-index: 500;
+        }
+        
+        .name {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        
+        .title-container::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        
+        .image {
+            float: left;
+            margin-right: 0px;
+        }
+        
+        ul.intersts>li {
+            list-style: none;
+        }
+    </style>
+    <title>자기소개서</title>
+</head>
+
+<body>
+    <div class="top-menu">
+        <ul class="top-links">
+            <li>
+                <a href="#"><img src="res/ssa.png" alt="SSAFY*" class="logo" style="width:90px;height:60px"></a>
+            </li>
+            <li><a href="https://github.com/samuel950523" target="_blank">GITHUB</a></li>
+            <li><a href="https://samuel950523.github.io/" target="_blank">BLOG</a></li>
+        </ul>
+    </div>
+    <div class="title-container">
+        <div class="title">
+            <div class="name" style="color:rgb(59, 53, 99)">JEONG JOON SEO</div>
+            <div class="caption-container">
+                <div class="caption-fg">I LOVE</div>
+            </div><br>
+            <div class="caption-container">
+                <div class="caption-fg">Problem Solving</div>
+            </div>
+            <div>
+                <img src="res/profile.png" class="image" alt="image" style="margin:10px 0px;  height:200px">
+                <p style="margin-top: 32px; color:darkblue; font-weight: bold; float:right">
+                    <b>서정준</b><br><b style="color:deepskyblue">SSAFY</b><br><b style="color:darkgreen">Konkuk Univ. </b><br><b style="color:darkorange">Bachelor of Electronics</b>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="contents">
+        <div class="section programming">
+            <h2>Programming</h2>
+            <p class="caption-article">
+                <b>What I'm interested in</b>
+                <ul class="intersts">
+                    <li>Data Science</li>
+                    <li>Web</li>
+                    <li>Machine Learning</li>
+                    <li>Computer Vision</li>
+                </ul>
+            </p>
+            <br>
+        </div>
+
+        <div class="section links">
+            <h2>연락처 / SNS</h2>
+            <div class="links-container">
+                <div class="link-icon1">
+                    <a href="#"><img src="res/mail.png" alt="mail" class="logo" style="margin:0px 30px;width:90px;height:60px"></a>
+                    <p>
+                        <b style="margin:0px 60px;">메일</b><br>
+                        <b>samuel95@naver.com</b><br>
+                    </p>
+                </div>
+                <div class=" link-icon1 ">
+                    <a href="https://github.com/samuel950523 "><img src="res/github.png " alt="github " class="logo " style="width:90px;height:60px; "></a>
+                    <p>
+                        <b>GitHub</b>
+                    </p>
+                </div>
+                <p style="clear:left "></p>
+                <div class="link-icon2 ">
+                    <a href="#"><img src="res/insta.jpg " alt="instagram " class="logo " style="margin:0px 30px; width:90px;height:60px; "></a>
+                    <p>
+                        <b style="margin:0px 30px;">Instagram</b><br>
+                        <b style="margin:0px 50px;">sir_j_j</b>
+                    </p>
+                </div>
+                <div class="link-icon2 ">
+                    <a href="#"><img src="res/facebook.png " alt="facebook " class="logo " style="margin:0px 10px;width:90px;height:60px; "></a>
+                    <p>
+                        <b style="margin:0px 15px ">Facebook</b><br>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
