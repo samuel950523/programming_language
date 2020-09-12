@@ -57,13 +57,8 @@
             var num = Math.floor(Math.random() * 45) + 1;
             if (numbers.indexOf(num) >= 0) continue;
             numbers[i++] = num;
+            document.getElementById("lotto").innerHTML = "<li>" + num + "</li>";
         }
-        text = "<ul>";
-        for (n of numbers) {
-            text += "<li>" + n + "</li>";
-        }
-        text += "</ul>";
-        document.getElementById("lotto").innerHTML = text;
     </script>
 </body>
 
