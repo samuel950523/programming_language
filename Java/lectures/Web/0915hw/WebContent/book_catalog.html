@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html>
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    
+    th,
+    td {
+        padding: 5px;
+    }
+</style>
+
+<body>
+    <h2>The XMLHttpRequest Object</h2>
+
+    <button type="button" onclick="loadDoc()">Get my BOOK collection</button>
+    <br />
+    <br />
+    <table id="demo"></table>
+
+    <script>
+        function loadDoc() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    myFunction(this);
+                }
+            };
+//             xhttp.open("GET", "book_catalog.xml", true);
+            xhttp.open("GET", "book_catalog.json", true);
+            xhttp.send();
+        }
+
+        // XML
+//         function myFunction(xml) {
+//             var i;
+//             var xmlDoc = xml.responseXML;
+//             var table = "<tr><th>Title</th><th>Writer</th><th>Publisher</th><th>Year</th><th>Price</th></tr>";
+//             var x = xmlDoc.getElementsByTagName("BOOK");
+//             for (i = 0; i < x.length; i++) {
+//                 table += "<tr><td>" +
+//                     x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+//                     "</td><td>" +
+//                     x[i].getElementsByTagName("WRITER")[0].childNodes[0].nodeValue +
+//                     "</td><td>" +
+//                     x[i].getElementsByTagName("PUBLISHER")[0].childNodes[0].nodeValue +
+//                     "</td><td>" +
+//                     x[i].getElementsByTagName("YEAR")[0].childNodes[0].nodeValue +
+//                     "</td><td>" +
+//                     x[i].getElementsByTagName("PRICE")[0].childNodes[0].nodeValue +
+//                     "</td></tr>";
+//             }
+//             document.getElementById("demo").innerHTML = table;
+//         }
+
+        // JSON
+        function myFunction(json) {
+            var i;
+            var jsonArray = JSON.parse(json.responseText);
+            var table = "<tr><th>Title</th><th>Writer</th><th>Publisher</th><th>Year</th><th>Price</th></tr>";
+            for (i = 0; i < jsonArray.length; i++) {
+                table +=
+                    "<tr><td>" +
+                    jsonArray[i]["TITLE"] + "</td><td>" +
+                    jsonArray[i]["WRITER"] + "</td><td>" +
+                    jsonArray[i]["PUBLISHER"] + "</td><td>" +
+                    jsonArray[i]["YEAR"] + "</td><td>" +
+                    jsonArray[i]["PRICE"] +
+                    "</td></tr>";
+            }
+            document.getElementById("demo").innerHTML = table;
+        }
+        
+    </script>
+</body>
+
+</html>

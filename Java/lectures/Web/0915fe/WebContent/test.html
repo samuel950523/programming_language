@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>The XMLHttpRequest Object</h2>
+
+	<button type="button" onclick="loadDoc()">Request data</button>
+
+	<p id="demo"></p>
+
+	<script>
+		function loadDoc() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function(){
+				if(this.readyState == 4 && this.status == 200){
+					document.getElementById("demo").innerHTML = this.responseText;
+				}
+				//else{
+				//	alert(this.status);
+				//}
+			};
+			
+			
+			// GET File
+			//xhttp.open("GET","test.txt");
+			//xhttp.send();
+			
+			// GET
+			//xhttp.open("GET","test.jsp?fname=Henry&lname=Ford",true);
+			//xhttp.send();
+			
+			// POST
+			xhttp.open("POST", "test.jsp");
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("fname=Henry&lname=Ford");
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        h1 {
+            color: darkblue;
+            font-size: 50px;
+            text-align: center;
+        }
+        
+        h3 {
+            color: coral;
+            font-size: 32px;
+            text-align: center;
+        }
+        
+        p {
+            text-align: center;
+            background-color: wheat;
+            padding-bottom: 100%;
+        }
+        
+        ul {
+            display: inline-block;
+            zoom: 1;
+        }
+        
+        li {
+            list-style: none;
+            float: left;
+            margin: 0px 45px;
+            font-size: 25px;
+            font-weight: bold;
+            color: royalblue;
+            width: 40px;
+            height: 40px;
+            border: 10px solid yellow;
+            background-color: yellow;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Lotto Numbers</h1>
+    <h3>Good Luck!!!</h3>
+    <p id="lotto"></p>
+    <script>
+        var numbers = new Array();
+        var i = 0;
+        while (true) {
+            if (numbers.length == 6) break;
+            var num = Math.floor(Math.random() * 45) + 1;
+            if (numbers.indexOf(num) >= 0) continue;
+            numbers[i++] = num;
+            document.getElementById("lotto").innerHTML = "<li>" + num + "</li>";
+        }
+    </script>
+</body>
+
+</html>

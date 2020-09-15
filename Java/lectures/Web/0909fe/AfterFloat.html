@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nanum Brush Script">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Nanum Brush Script', serif;
+            font-size: 24px;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        li {
+            float: left;
+            margin-right: 5px;
+        }
+        
+        li::after {
+            content: "|";
+            padding-left: 5px;
+        }
+        
+        li:last-child::after {
+            content: "";
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        a:hover {
+            color: orangered;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li><a href="#">menu1</a></li>
+        <li><a href="#">menu2</a></li>
+        <li><a href="#">menu3</a></li>
+    </ul>
+    <hr>
+    <p>안녕하세요, 구글 폰트입니다.</p>
+</body>
+
+</html>
