@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Button Styles</h2>
+        <button id="btnShow" type="button" class="btn btn-outline-dark">Show</button>
+        <button id="btnShow3" type="button" class="btn btn-outline-dark">Show 3</button>
+
+        <hr>
+        <div class="progress">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+
+        <hr>
+        <div class="progress">
+            <div id="progressBar1" class="progress-bar bg-success"></div>
+            <div id="progressBar2" class="progress-bar bg-warning"></div>
+            <div id="progressBar3" class="progress-bar bg-danger"></div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#btnShow").click(function() {
+                $("#progressBar").animate({
+                    width: "70%"
+                }, 2000);
+            });
+
+            $("#btnShow3").click(function() {
+                $("#progressBar1").animate({
+                    width: "40%"
+                }, 2000).text("Free Space");
+                $("#progressBar2").animate({
+                    width: "20%"
+                }, 2000).text("Warning");
+                $("#progressBar3").animate({
+                    width: "10%"
+                }, 2000).text("Danger");
+            });
+        });
+    </script>
+</body>
+
+</html>

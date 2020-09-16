@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        
+        th,
+        td {
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>The XMLHttpRequest Object</h2>
+
+    <button type="button">Get my CD collection</button>
+    <br>
+    <br>
+    <table id="demo"></table>
+
+    <script>
+        $(document).ready(function() {
+            $("button").click(function() {
+                // XML
+                // 				$.ajax({
+                // 					type : 'get',
+                // 					url : 'cd_catalog.xml',
+                // 					dataType : 'xml',
+                // 					success : function(data, status, xhr) {
+                // 						myFunction(data);
+                // 					},
+                // 					error : function(jqXHR, textStatus, errorThrown) {
+                // 						alert("서버에 문제가 발생했습니다. " + jqXHR.status);
+                // 					}
+                // 				});
+
+                // JSON
+                $.ajax({
+                    type: 'get',
+                    url: 'cd_catalog.json',
+                    dataType: 'json',
+                    success: function(data, status, xhr) {
+                        myFunction(data);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert("서버에 문제가 발생했습니다. " + jqXHR.status);
+                    }
+                });
+            });
+
+        });
+        //			XML
+        //         function myFunction(xml) {
+        //             var table = "<tr><th>Artist</th><th>Title</th></tr>";
+        //             $(xml).find('CD').each(
+        //                 function() {
+        //                     table += "<tr><td>" +
+        //                         $(this).find("ARTIST").text() +
+        //                         "</td><td>" +
+        //                         $(this).find("TITLE").text() +
+        //                         "</td></tr>";
+        //                 });
+        //             $("#demo").html(table);
+        //         }
+
+        //         JSON
+        function myFunction(jsonArray) {
+            var table = "<tr><th>Artist</th><th>Title</th></tr>";
+            for (var i = 0; i < jsonArray.length; i++) {
+                table += "<tr><td>" + jsonArray[i]["ARTIST"] + "</td><td>" +
+                    jsonArray[i]["TITLE"] + "</td></tr>";
+            }
+            $("#demo").html(table);
+        }
+    </script>
+
+</body>
+
+</html>

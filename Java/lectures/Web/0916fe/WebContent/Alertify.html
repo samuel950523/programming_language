@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/alertify.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/css/alertify.min.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/css/themes/default.min.css" />
+    <title>Alertify Test</title>
+</head>
+
+<body>
+    <div>
+        <button id="btnAlert">Alert</button>
+        <button id="btnNotify">Notify Success</button>
+        <button id="btnError">Notify Error</button>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#btnAlert").click(function() {
+                alertify
+                    .alert("This is an alert dialog.", function() {
+                        alertify.message('OK');
+                    });
+            });
+
+            $("#btnNotify").click(function() {
+                alertify.success('Success message');
+            });
+
+            $("#btnError").click(function() {
+                alertify.error('Error message');
+            });
+        });
+    </script>
+</body>
+
+</html>

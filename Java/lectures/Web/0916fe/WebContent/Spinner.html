@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+        #spinner {
+            position: absolute;
+            /*Can also be `fixed`*/
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            /*Solves a problem in which the content is being cut when the div is smaller than its' wrapper:*/
+            max-width: 100%;
+            max-height: 100%;
+            overflow: auto;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h2>Spinners</h2>
+
+        <div id="spinner" class="spinner-border"></div>
+
+        <p id="demo"></p>
+
+        <button id="btnAJAX" type="button" class="btn btn-outline-dark">Go</button>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#spinner").hide();
+
+            $("#btnAJAX").click(function() {
+//                 $("#spinner").show();
+                $.get("Spinner.jsp", function(data, status) {
+                    $("#demo").html(data);
+//                     $("#spinner").hide();
+                });
+            });
+        });
+
+        // global
+        $(document).ajaxStart(function() {
+                $("#spinner").show();
+            })
+            .ajaxStop(function() {
+                $("#spinner").hide();
+            });
+    </script>
+</body>
+
+</html>
