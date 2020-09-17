@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            padding: 70px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h2>상품을 등록해주세요.</h2>
+        <form action="/0917hw/ParameterServlet" method="post">
+            <label for="name">상품명 : </label>
+            <input type="text" name="name">
+            <br><br>
+            <label for="name">상품 가격 : </label>
+            <input type="text" name="price">
+            <br><br>
+            <label for="name">상품 설명 : </label>
+            <input type="text" name="describe">
+            <br><br>
+            <button type="submit">전송</button>
+            <button type="reset">취소</button>
+        </form>
+    </div>
+</body>
+
+</html>
