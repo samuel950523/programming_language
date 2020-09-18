@@ -157,7 +157,9 @@
       <Context docBase="0915" path="/0915" reloadable="true" source="org.eclipse.jst.jee.server:0915"/>
       <Context docBase="0916bootstrap" path="/0916bootstrap" reloadable="true" source="org.eclipse.jst.jee.server:0916bootstrap"/>
       <Context docBase="0915xml_json" path="/0915xml_json" reloadable="true" source="org.eclipse.jst.jee.server:0915xml_json"/>
-      <Context docBase="0917servlet_jsp" path="/0917servlet_jsp" reloadable="true" source="org.eclipse.jst.jee.server:0917servlet_jsp"/><Context docBase="0917hw" path="/0917hw" reloadable="true" source="org.eclipse.jst.jee.server:0917hw"/></Host>
+      <Context docBase="0917servlet_jsp" path="/0917servlet_jsp" reloadable="true" source="org.eclipse.jst.jee.server:0917servlet_jsp"/>
+      <Context docBase="0917hw" path="/0917hw" reloadable="true" source="org.eclipse.jst.jee.server:0917hw"/>
+      <Context docBase="0918board" path="/" reloadable="true" source="org.eclipse.jst.jee.server:0918board"/></Host>
     </Engine>
   </Service>
 </Server>
