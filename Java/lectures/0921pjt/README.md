@@ -8,13 +8,24 @@
 
 1. ### 메인페이지 구성, 거래가 검색
 
-![g1](/uploads/99020903f956b107443f50a85e930e0d/g1.gif)
-![g2](/uploads/be09c8f9e72c14ef19bf510c0967ebdf/g2.gif)
+- 동별 검색 기능
+  ![동검색](/uploads/2886a266d3a9526e8313d56460e37c98/동검색.gif)
+- 아파트명 검색 기능
+  ![아파트검색](/uploads/904644539aec047ccae6478239c9de62/아파트검색.gif)
 
 2. ### 회원관리 페이지
 
-![알1](/uploads/99600c6490667edf0c9f775e0ce2104d/알1.jpg)
-![알2](/uploads/0cbd9c64d481444b69944ff63c3e6fdc/알2.jpg)
-![알3](/uploads/6798d68e5e437e6ac3c401b4262df407/알3.jpg)
+- 회원가입
+  - 유효성 검사
+    ![회원가입1](/uploads/843057c6a9992764f4c34e4421f54cfd/회원가입1.gif)
+  - 최종
+    ![회원가입2](/uploads/215907f290a5b734bfebe0ef75cccfae/회원가입2.gif)
+- 회원관리
+  - 회원 정보 변경과 삭제 기능
+    ![회원관리](/uploads/074218b2063482293d7de044cf63573f/회원관리.gif)
 
 3. ### 로그인/로그아웃 페이지
+
+- 로그인, 로그아웃
+  ![로그인1](/uploads/c480bf819cec692d1b2e90ecbe311c38/로그인1.gif)
+  ![로그인](/uploads/fbde0885913e37f10c342e5f5aa4dbb0/로그인.gif)
