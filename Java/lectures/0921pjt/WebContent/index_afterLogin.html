@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>Bootstrap Example</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script
+	src="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/alertify.min.js"></script>
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/css/alertify.min.css" />
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/css/themes/default.min.css" />
+<style>
+#map {
+	height: 100%;
+}
+
+#option {
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+		<div
+			class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+			<!-- Brand/logo -->
+			<a class="navbar-brand" href="#"> <img src="logo.png" alt="logo"
+				style="width: 50px" />
+			</a>
+
+			<!-- Links -->
+			<ul class="navbar-nav navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">관심 지역 설정</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="#">관심 지역
+						둘러보기</a></li>
+			</ul>
+		</div>
+		<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item">
+					<form class="form-inline">
+						<input class="form-control mr-sm-2" type="text"
+							placeholder="검색어를 입력하세요" />
+						<button class="btn btn-success" type="submit">검색</button>
+					</form>
+				</li>
+			</ul>
+			<div class="col-md-2">
+				<button type="button" class="btn btn-light" id="myPage"
+					onclick="location.href='myPage.html';">회원관리</button>
+			</div>
+			<div class="col-md-1 mr-4">
+				<button type="button" class="btn btn-light" id="LogoutBtn">
+					Logout</button>
+			</div>
+		</div>
+	</nav>
+	<div id="option">
+		<button class="btn btn-primary" id="demo" onclick="selectedOption()">동으로
+			검색</button>
+		<button class="btn btn-outline-primary" id="demo2"
+			onclick="selectedOption2()">아파트명으로 검색</button>
+	</div>
+
+	<div class="container">
+		<center>
+			<div class="container row col-lg-6">
+				<div class="col-3">
+					<select class="form-control" id="local" name="sellist1">
+						<option>서울시</option>
+						<option>경기도</option>
+						<option>강원도</option>
+						<option>충청북도</option>
+						<option>충청남도</option>
+					</select>
+				</div>
+				<div class="col-3">
+					<select class="form-control" id=gu " name="sellist2">
+						<option>강동구</option>
+						<option>강남구</option>
+						<option>강북구</option>
+						<option>광진구</option>
+					</select>
+				</div>
+				<div class="col-3" id="dong">
+					<select class=" form-control" name="sellist3">
+						<option>동1</option>
+						<option>동2</option>
+						<option>동3</option>
+						<option>동4</option>
+					</select>
+				</div>
+				<div class="col-3" id="aptName">
+					<input type="text" name="aptName" size="10">
+				</div>
+				<div class="col-3" id="addedButton">
+					<button type="button" class="btn btn-success"
+						onclick="searchAptName()">검색</button>
+				</div>
+			</div>
+			<hr class="col-6" style="border: 0px; height: 2px; background: #ccc;">
+		</center>
+	</div>
+
+	<div class="row">
+		<div class="col-4" id="infoList">
+			<div class="container">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>주소</th>
+							<th>거래 금액(원)</th>
+							<th>면적(m)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>싸피아파트</td>
+							<td>8,000</td>
+							<td>58.67</td>
+						</tr>
+						<tr>
+							<td>역삼동다세대주택</td>
+							<td>5,000</td>
+							<td>35.72</td>
+						</tr>
+						<tr>
+							<td>대섭빌라</td>
+							<td>6,900</td>
+							<td>30.66</td>
+						</tr>
+						<tr>
+							<td>정준퍼스티지</td>
+							<td>9,500</td>
+							<td>60.95</td>
+						</tr>
+						<tr>
+							<td>지희아뜨리에</td>
+							<td>2,600</td>
+							<td>20.26</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="col-8" id="map"
+			style="width: 100%; height: 600px; margin: auto;">
+			<script defer
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfLan0NDK1vGzFCPgbN3QeVNIaMEKKmiE&callback=initMap"></script>
+		</div>
+	</div>
+
+	<br />
+	<br />
+	<br />
+
+	<script>
+		document.getElementById("infoList").style.display = "none";
+		document.getElementById("map").style.display = "none";
+		document.getElementById("aptName").style.display = "none";
+
+		function selectedOption() {
+			document.getElementById("demo").className = "btn btn-primary";
+			document.getElementById("demo2").className = "btn btn-outline-primary";
+			document.getElementById("infoList").style.display = "none";
+			document.getElementById("map").style.display = "none";
+			document.getElementById("dong").style.display = "block";
+			document.getElementById("aptName").style.display = "none";
+		}
+
+		function selectedOption2() {
+			document.getElementById("demo2").className = "btn btn-primary";
+			document.getElementById("demo").className = "btn btn-outline-primary";
+			document.getElementById("infoList").style.display = "none";
+			document.getElementById("map").style.display = "none";
+			document.getElementById("dong").style.display = "none";
+			document.getElementById("aptName").style.display = "block";
+		}
+
+		var multi = {
+			lat : 37.5012743,
+			lng : 127.039585
+		};
+		var map;
+		var markers = [];
+		var infoWindow;
+
+		function initMap() {
+			map = new google.maps.Map(document.getElementById('map'), {
+				center : multi,
+				zoom : 15
+			});
+
+			infoWindow = new google.maps.InfoWindow;
+
+			const myposition = "img/my_position.png";
+
+			// Geolocation - 현재 위치 얻기 
+			infoWindow = new google.maps.InfoWindow;
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(position) {
+					var pos = {
+						lat : position.coords.latitude,
+						lng : position.coords.longitude
+					};
+
+					var mymarker = {
+						coords : pos,
+						iconImage : myposition,
+						content : '현재위치'
+					};
+					addMarker(mymarker);
+
+					infoWindow.setPosition(pos);
+					infoWindow.setContent('현재 나의 위치.');
+					infoWindow.open(map);
+					map.setCenter(pos);
+				}, function() {
+					handleLocationError(true, infoWindow, map.getCenter());
+				});
+			} else {
+				handleLocationError(false, infoWindow, map.getCenter());
+			}
+		}
+
+		function searchAptName() {
+			document.getElementById("infoList").style.display = "block";
+			document.getElementById("map").style.display = "block";
+		}
+	</script>
+</body>
+
+</html>
