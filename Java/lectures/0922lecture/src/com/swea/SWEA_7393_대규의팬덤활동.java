@@ -51,6 +51,7 @@ public class SWEA_7393_대규의팬덤활동 {
 		for (int j = 0; j <= 9; j++) {
 			ans = (ans + dp[n][j][visit - 1]) % MOD;
 		}
+		
 		return ans;
 	}
 }
