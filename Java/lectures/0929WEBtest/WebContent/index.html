@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Java Call</title>
+    <style type="text/css">
+        .quest {
+            padding: 50px;
+            width: 600px;
+            height: 150px;
+            border: 2px dashed blue;
+            background-color: rgb(234, 234, 234);
+        }
+        
+        .pororo {
+            display: inline-block;
+            width: 100px;
+        }
+        
+        #result1,
+        #result2 {
+            /* 구현하세요.  글자 사이즈를  1.5배로 출력하고, 빨강색으로 출력하세요.*/
+            font-size: 150%;
+            color: red;
+        }
+        
+        .btn {
+            width: 100px;
+        }
+        
+        h2 {
+            height: 50px;
+        }
+        
+        div {
+            /* 구현하세요.  div 태그들 사이의 여백을 10px로 설정하세요.*/
+            margin: 10px 0px 10px 0px;
+        }
+        
+        #ins {
+            vertical-align: top;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $("#reset1").hide();
+            $("#reset2").hide();
+            $("#exec1").click(function() {
+                /* 구현 하세요.  입력된  #words 데이터를 가져와  서버에서 요청하고  그 결과를 #result1에 출력하는 코드를 구현하세요 */
+                var words = $("#words").val();
+                $.ajax({
+                    url: "main.do?action=count",
+                    type: "post",
+                    data: {
+                        words: words,
+                    },
+                    error: function(xhr, status, message) {
+                        alert("error:" + message);
+                    },
+                    success: function(result) {
+                        $("#result1").text(result);
+                        $("#reset1").show();
+                    },
+                });
+            });
+
+            $("#exec2").click(function() {
+                var fname = $("#fname").val();
+                $.ajax({
+                    url: "main.do?action=pororo",
+                    type: "post",
+                    data: {
+                        fname: fname,
+                    },
+                    error: function(xhr, status, message) {
+                        alert("error:" + message);
+                    },
+                    success: function(result) {
+                        $("#result2").text(result);
+                        $("#reset2").show();
+                    },
+                });
+            });
+
+            $("#reset1").click(function() {
+                $("#reset1").hide();
+            });
+
+            $("#reset2").click(function() {
+                $("#reset2").hide();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="q1" class="quest">
+        <h2>Count</h2>
+        <div>
+            <span id="ins">입력 문자열 : </span><input type="text" id="words" />
+        </div>
+        <div>
+            <input type="button" id="exec1" class="btn" value="실 행" /> 이동해야하는 최소 칸수 : <span id="result1"> </span>
+            <input type="button" id="reset1" value="RESET" />
+        </div>
+    </div>
+    <div id="q2" class="quest">
+        <h2>Pororo</h2>
+        <div>
+            <span class="pororo">입력 파일명:</span><input type="text" id="fname" />
+        </div>
+        <div>
+            <input type="button" id="exec2" class="btn" value="실 행" /> 보물이 묻혀 있는 두 곳 간의 최단 거리 이동 시간 : <span id="result2"> </span>
+            <input type="button" id="reset2" value="RESET" />
+        </div>
+    </div>
+</body>
+
+</html>
