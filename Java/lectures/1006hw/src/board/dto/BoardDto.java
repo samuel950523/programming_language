@@ -9,11 +9,9 @@ public class BoardDto {
 	private String userProfileImageUrl;
 	private String title;
 	private String content;
-	// private LocalDate regDt;
 	private LocalDateTime regDt;
 	private int readCount;
 
-	// private List<BoardFileDto> fileList;
 	public BoardDto() {
 	};
 
@@ -52,7 +50,7 @@ public class BoardDto {
 	}
 
 	public void setUserProfileImageUrl(String userProfileImageUrl) {
-		if(userProfileImageUrl==null||"null".equals(userProfileImageUrl))
+		if (userProfileImageUrl == null || "null".equals(userProfileImageUrl))
 			this.userProfileImageUrl = "img/noProfile.png";
 		else
 			this.userProfileImageUrl = userProfileImageUrl;

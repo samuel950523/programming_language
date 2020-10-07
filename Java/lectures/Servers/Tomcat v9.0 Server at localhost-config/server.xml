@@ -159,7 +159,7 @@
       <Context docBase="0915xml_json" path="/0915xml_json" reloadable="true" source="org.eclipse.jst.jee.server:0915xml_json"/>
       <Context docBase="0917servlet_jsp" path="/0917servlet_jsp" reloadable="true" source="org.eclipse.jst.jee.server:0917servlet_jsp"/>
       <Context docBase="0917hw" path="/0917hw" reloadable="true" source="org.eclipse.jst.jee.server:0917hw"/>
-      <Context docBase="0918board" path="/" reloadable="true" source="org.eclipse.jst.jee.server:0918board"/><Context docBase="0921pjt" path="/0921pjt" reloadable="true" source="org.eclipse.jst.jee.server:0921pjt"/></Host>
+      <Context docBase="0918board" path="/" reloadable="true" source="org.eclipse.jst.jee.server:0918board"/><Context docBase="0921pjt" path="/0921pjt" reloadable="true" source="org.eclipse.jst.jee.server:0921pjt"/><Context docBase="1006lecture" path="/1006lecture" reloadable="true" source="org.eclipse.jst.jee.server:1006lecture"/><Context docBase="0918board" path="/0918board" reloadable="true" source="org.eclipse.jst.jee.server:0918board"/><Context docBase="1006hw" path="/1006hw" reloadable="true" source="org.eclipse.jst.jee.server:1006hw"/></Host>
     </Engine>
   </Service>
 </Server>

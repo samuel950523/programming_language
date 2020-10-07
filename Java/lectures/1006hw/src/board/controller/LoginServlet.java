@@ -25,10 +25,9 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
 		String userEmail = request.getParameter("userEmail");
 		String userPassword = request.getParameter("userPassword");
-		System.out.println(userEmail);
+
 		UserDto userDto = service.login(userEmail, userPassword);
 
 		if (userDto != null) {
@@ -37,10 +36,6 @@ public class LoginServlet extends HttpServlet {
 
 			response.setContentType("text/html; charset=utf-8");
 
-			// Before Learn JSON
-			// response.getWriter().write("success");
-
-			// After Learn JSON
 			Gson gson = new Gson();
 
 			JsonObject jsonObject = new JsonObject();
@@ -53,10 +48,6 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			response.setContentType("text/html; charset=utf-8");
 
-			// Before Learn JSON
-			// response.getWriter().write("fail");
-
-			// After Learn JSON
 			Gson gson = new Gson();
 
 			JsonObject jsonObject = new JsonObject();

@@ -21,34 +21,32 @@ import board.service.UserServiceImpl;
 @WebServlet("/register")
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		request.setCharacterEncoding("utf-8");
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String userName = request.getParameter("userName");
-		System.out.println(userName);
 		String userEmail = request.getParameter("userEmail");
 		String userPassword = request.getParameter("userPassword");
-		
+
 		UserDto userDto = new UserDto();
 		userDto.setUserName(userName);
 		userDto.setUserEmail(userEmail);
 		userDto.setUserPassword(userPassword);
-		
-		UserService userService =new UserServiceImpl();
-		
+
+		UserService userService = new UserServiceImpl();
+
 		int ret = userService.userRegister(userDto);
-		
+
 		Gson gson = new Gson();
-		
+
 		JsonObject jsonObject = new JsonObject();
-		
-		if(ret==1)
-			jsonObject.addProperty("result","success");
+
+		if (ret == 1)
+			jsonObject.addProperty("result", "success");
 		else
-			jsonObject.addProperty("result","fail");
-		
+			jsonObject.addProperty("result", "fail");
+
 		String jsonStr = gson.toJson(jsonObject);
 		response.getWriter().write(jsonStr);
 	}
-
 }
