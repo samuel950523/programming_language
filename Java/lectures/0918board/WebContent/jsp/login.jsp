@@ -1,45 +1,55 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%
-    String contextPath = request.getContextPath();
+	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 
 <html>
 <head>
 <meta charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/alertify.min.js"></script>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/css/alertify.min.css"/>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/css/themes/default.min.css"/>
-    <title>Login</title>
+<script
+	src="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/alertify.min.js"></script>
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/css/alertify.min.css" />
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/css/themes/default.min.css" />
+<title>Login</title>
 </head>
 <body>
-<br>
-<br>
-    <div class="container">
-        <h2>Login</h2>
-          <form>
-            <div class="form-group">
-                <label class="sr-only" for="userEmail">Email</label>
-                <input type="email" class="form-control" id="userEmail" name="userEmail" placeholder="Email" value="qwe123@naver.com">
-            </div>
-            <div class="form-group">
-                <label class="sr-only" for="userPassword">Password</label>
-                <input type="password" class="form-control" id="userPassword" name="userPassword"  placeholder="Password" value="qwe123!@#">
-            </div>
-        </form>
-        <div>
-            <button id="btnLogin" class="btn btn-primary">로그인</button>
-            <a href="<%=contextPath%>/jsp/register.jsp" class="btn btn-success">회원가입</a>
-        </div>
+	<br>
+	<br>
+	<div class="container">
+		<h2>Login</h2>
+		<form>
+			<div class="form-group">
+				<label class="sr-only" for="userEmail">Email</label> <input
+					type="email" class="form-control" id="userEmail" name="userEmail"
+					placeholder="Email" value="qwe123@naver.com">
+			</div>
+			<div class="form-group">
+				<label class="sr-only" for="userPassword">Password</label> <input
+					type="password" class="form-control" id="userPassword"
+					name="userPassword" placeholder="Password" value="qwe123!@#">
+			</div>
+		</form>
+		<div>
+			<button id="btnLogin" class="btn btn-primary">로그인</button>
+			<a href="<%=contextPath%>/jsp/register.jsp" class="btn btn-success">회원가입</a>
+		</div>
 
-    </div>
+	</div>
 
-<script>
+	<script>
 $(document).ready(function(){
     $("#btnLogin").click(function(){
 
@@ -76,7 +86,6 @@ function validate(){
 
 
 
-// pure javascript ajax
 var httpRequest;
 
 function login(){
@@ -94,22 +103,17 @@ function login(){
 function loginResult(){
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
         if (httpRequest.status === 200) {
-
-            // Before Learn JSON
-            // var result = httpRequest.responseText;
-
-            // After Learn JSON
             var data = JSON.parse(httpRequest.responseText);
             if( data.result == "success" ){
                 window.location.href="<%=contextPath%>/board/boardMain";
-            }else if( data.result == "fail" ){
-                alert("아이디 또는 비밀번호가 올바르지 않습니다.");
-            }
-        }else{
-            alert("서버에 문제가 발생했습니다.");
-        }
-    }
-}
-</script>
+					} else if (data.result == "fail") {
+						alert("아이디 또는 비밀번호가 올바르지 않습니다.");
+					}
+				} else {
+					alert("서버에 문제가 발생했습니다.");
+				}
+			}
+		}
+	</script>
 </body>
 </html>

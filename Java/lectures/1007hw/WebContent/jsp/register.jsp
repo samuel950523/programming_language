@@ -90,6 +90,7 @@
                 if ($("form").find(".is-invalid").length > 0) {
                     alert("입력이 올바르지 않습니다.")
                 } else {
+                    // 전송
                     register();
                 }
             });
@@ -171,6 +172,10 @@
                 }
             });
         }
+        
+        
+        
+        
     </script>
 
     </html>

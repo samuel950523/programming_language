@@ -153,13 +153,8 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="0904webtest" path="/0904webtest" reloadable="true" source="org.eclipse.jst.jee.server:0904webtest"/>
-      <Context docBase="0915" path="/0915" reloadable="true" source="org.eclipse.jst.jee.server:0915"/>
-      <Context docBase="0916bootstrap" path="/0916bootstrap" reloadable="true" source="org.eclipse.jst.jee.server:0916bootstrap"/>
-      <Context docBase="0915xml_json" path="/0915xml_json" reloadable="true" source="org.eclipse.jst.jee.server:0915xml_json"/>
-      <Context docBase="0917servlet_jsp" path="/0917servlet_jsp" reloadable="true" source="org.eclipse.jst.jee.server:0917servlet_jsp"/>
-      <Context docBase="0917hw" path="/0917hw" reloadable="true" source="org.eclipse.jst.jee.server:0917hw"/>
-      <Context docBase="0918board" path="/" reloadable="true" source="org.eclipse.jst.jee.server:0918board"/><Context docBase="0921pjt" path="/0921pjt" reloadable="true" source="org.eclipse.jst.jee.server:0921pjt"/><Context docBase="1006lecture" path="/1006lecture" reloadable="true" source="org.eclipse.jst.jee.server:1006lecture"/><Context docBase="0918board" path="/0918board" reloadable="true" source="org.eclipse.jst.jee.server:0918board"/><Context docBase="1006hw" path="/1006hw" reloadable="true" source="org.eclipse.jst.jee.server:1006hw"/></Host>
+  
+      <Context docBase="1008fepjt" path="/1008fepjt" reloadable="true" source="org.eclipse.jst.jee.server:1008fepjt"/><Context docBase="1007hw" path="/1007hw" reloadable="true" source="org.eclipse.jst.jee.server:1007hw"/><Context docBase="0918board" path="/0918board" reloadable="true" source="org.eclipse.jst.jee.server:0918board"/></Host>
     </Engine>
   </Service>
 </Server>
