@@ -1,0 +1,124 @@
+-- 1013 hw
+
+select * from emp;
+select * from dept;
+select * from salgrade;
+
+-- 1
+SELECT ENAME, e.DEPTNO, d.DNAME
+FROM emp e INNER JOIN dept d
+ON e.DEPTNO = d.DEPTNO
+WHERE e.DEPTNO=30;
+
+-- 2
+SELECT DISTINCT e.JOB, d.LOC
+FROM emp e INNER JOIN dept d
+ON e.DEPTNO = d.DEPTNO
+WHERE e.DEPTNO=30;
+
+-- 3
+SELECT e.ENAME, d.DNAME, d.LOC
+FROM emp e INNER JOIN dept d
+ON e.DEPTNO = d.DEPTNO
+WHERE e.COMM IS NOT NULL;
+
+-- 4
+SELECT e.ENAME, d.DNAME
+FROM emp e INNER JOIN dept d
+ON e.DEPTNO = d.DEPTNO
+WHERE e.ENAME LIKE '%A%';
+
+-- 5
+SELECT e.ENAME, e.JOB, d.DEPTNO, d.LOC
+FROM emp e INNER JOIN dept d
+ON e.DEPTNO = d.DEPTNO
+WHERE d.LOC = 'Dallas';
+
+-- 6
+SELECT e.ENAME AS employee, e.EMPNO AS 'emp#',
+m.ENAME AS manager, m.EMPNO AS 'mgr#'
+FROM emp e INNER JOIN emp m
+ON e.MGR = m.EMPNO;
+
+-- 7
+SELECT e.ENAME, e.JOB, d.DNAME, e.SAL, s.GRADE
+FROM emp e INNER JOIN dept d
+ON e.DEPTNO = d.DEPTNO
+INNER JOIN salgrade s
+WHERE e.SAL BETWEEN s.LOSAL AND s.HISAL;
+
+-- 8
+SELECT ENAME, HIREDATE
+FROM emp
+WHERE HIREDATE>(
+	SELECT HIREDATE
+	FROM emp
+	WHERE ENAME='SMITH'
+);
+
+-- 9
+SELECT e.ENAME AS Employee, e.HIREDATE AS EmpHiredate,
+e.MGR AS Manager, m.HIREDATE AS MgrHiredate
+FROM emp e INNER JOIN emp m
+ON e.MGR = m.EMPNO
+WHERE e.HIREDATE < m.HIREDATE;
+
+-- 10
+SELECT e.ENAME, e.HIREDATE
+FROM emp e INNER JOIN dept d
+ON e.DEPTNO = d.DEPTNO
+	WHERE d.DEPTNO = (
+	SELECT DEPTNO
+	FROM emp
+	WHERE ENAME='SMITH'
+)
+AND e.ENAME != 'SMITH';
+
+-- 11
+SELECT EMPNO, ENAME, SAL
+FROM emp
+WHERE SAL > (
+	SELECT avg(SAL) FROM emp
+);
+
+-- 12
+SELECT EMPNO, ENAME, DEPTNO
+FROM emp
+WHERE DEPTNO IN (
+	SELECT DEPTNO
+	FROM emp
+	WHERE ENAME LIKE '%T%'
+);
+
+-- 13
+SELECT EMPNO, ENAME, SAL
+FROM emp
+WHERE SAL > (
+	SELECT avg(SAL) FROM emp
+)
+AND DEPTNO IN (
+	SELECT DEPTNO
+	FROM emp
+	WHERE ENAME LIKE '%T%'
+);
+
+-- 14
+SELECT EMPNO, ENAME, SAL
+FROM emp
+WHERE SAL > ALL(
+	SELECT SAL
+    FROM emp
+    WHERE JOB='Clerk'
+)
+ORDER BY SAL DESC;
+
+-- 15
+SELECT e.ENAME, e.JOB, d.DEPTNO, d.LOC, e.SAL, e.COMM, d.LOC
+FROM emp e INNER JOIN dept d
+ON e.DEPTNO = d.DEPTNO
+WHERE e.SAL IN (
+	SELECT e.SAL
+	FROM emp e INNER JOIN dept d
+    ON e.DEPTNO = d.DEPTNO
+	WHERE d.LOC = 'New York'
+);
