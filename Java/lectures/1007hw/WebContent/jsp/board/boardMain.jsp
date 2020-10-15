@@ -298,8 +298,7 @@ UserDto userDto = (UserDto) session.getAttribute("userDto");
 			$("#regDtDetail").html(regDtStr);
 			$("#readCountDetail").html(readCount);
 	
-			if( userSeq != '<%=userDto.getUserSeq()%>
-		') {
+			if( userSeq != '<%=userDto.getUserSeq()%>') {
 				$("#btnBoardUpdateForm").hide();
 				$("#btnBoardDeleteConfirm").hide();
 			} else {
