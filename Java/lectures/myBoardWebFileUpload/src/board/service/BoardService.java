@@ -1,15 +1,20 @@
 package board.service;
 
+import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
 import board.dto.BoardDto;
+import javax.servlet.http.Part;
 
 public interface BoardService {
-	public int boardInsert(BoardDto dto);
-	public int boardUpdate(BoardDto dto);
+	// Changes for FileUpload
+	public int boardInsert(BoardDto dto, Collection<Part> parts) throws IOException;
+	public int boardUpdate(BoardDto dto, Collection<Part> parts) throws IOException;
+	
 	public int boardDelete(int boardId);
 	
-	public BoardDto boardDetail(int boardId);
+	public BoardDto boardDetail(int boardId, int userSeq);
 	
 	public List<BoardDto> boardList(int limit, int offset);
 	public int boardListTotalCnt();

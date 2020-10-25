@@ -154,7 +154,7 @@
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
   
-      <Context docBase="myBoard" path="/myBoard" reloadable="true" source="org.eclipse.jst.jee.server:myBoard"/><Context docBase="myBoardWebFileUpload" path="/myBoardWebFileUpload" reloadable="true" source="org.eclipse.jst.jee.server:myBoardWebFileUpload"/><Context docBase="webTest" path="/webTest" reloadable="true" source="org.eclipse.jst.jee.server:webTest"/></Host>
+      <Context docBase="myBoardWebFileUpload" path="/myBoardWebFileUpload" reloadable="true" source="org.eclipse.jst.jee.server:myBoardWebFileUpload"/><Context docBase="1016pjt" path="/1016pjt" reloadable="true" source="org.eclipse.jst.jee.server:1016pjt"/></Host>
     </Engine>
   </Service>
 </Server>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DBTest-Pair</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+	<h1>Receive JSON From DB</h1>
+	<button id="btnquizDetail">Quiz 상세</button>
+	<button id="btnquizList">Quiz 목록</button>
+	<button id="btnquizInsert">Quiz 등록</button>
+	<button id="btnquizUpdate">Quiz 수정</button>
+	<button id="btnquizDelete">Quiz 삭제</button>
+
+	<button id="btnquizInsertJSON">Quiz 등록 JSON</button>
+	<button id="btnquizDetailNormal">Quiz 상세 일반</button>
+
+</body>
+
+<script>
+	$(document).ready(function() {
+
+		$("#btnquizDetail").click(function() {
+			$.ajax({
+				type : 'GET',
+				url : '/mvcdbhw/quizDetail/1',
+				dataType : 'json',
+				success : function(data) {
+					console.log(data);
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		});
+
+		$("#btnquizDetailNormal").click(function() {
+			window.location.href = "/mvcdbhw/quizDetailNormal/1"
+		});
+
+		$("#btnquizList").click(function() {
+			$.ajax({
+				type : 'GET',
+				url : '/mvcdbhw/quizList',
+				dataType : 'json',
+				success : function(data) {
+					console.log(data);
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		});
+
+		var quizInsertData = {
+			q_index : 7,
+			first_name : "Gugu",
+			last_name : "Kim",
+			email : "gugu@google.com",
+			joindate : "2020-10-23"
+		};
+
+		$("#btnquizInsert").click(function() {
+			$.ajax({
+				type : 'POST',
+				url : '/mvcdbhw/quizInsert',
+				// data : JSON.stringify(quizInsertData),
+				data : quizInsertData,
+				// contentType : 'application/json', 
+				success : function(data) {
+					console.log(data);
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		});
+
+		$("#btnquizInsertJSON").click(function() {
+			$.ajax({
+				type : 'POST',
+				url : '/mvcdbhw/quizInsertJSON',
+				data : JSON.stringify(quizInsertData),
+				contentType : 'application/json',
+				success : function(data) {
+					console.log(data);
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		});
+
+		var quizUpdateData = {
+			q_index : 7,
+			first_name : "Gugu",
+			last_name : "Kim",
+			email : "gugu123@google.com",
+			joindate : "2010-10-23"
+		};
+
+		$("#btnquizUpdate").click(function() {
+			$.ajax({
+				type : 'POST',
+				url : '/mvcdbhw/quizUpdate',
+				data : quizUpdateData,
+				// contentType : 'application/json', 
+				success : function(data) {
+					console.log(data);
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		});
+
+		$("#btnquizDelete").click(function() {
+			$.ajax({
+				type : 'POST',
+				url : '/mvcdbhw/quizDelete',
+				data : {
+					quizloyeeId : 7
+				},
+				success : function(data) {
+					console.log(data);
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		});
+
+	});
+</script>
+</html>

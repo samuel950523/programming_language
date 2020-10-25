@@ -6,7 +6,7 @@ public class BoardFileDto {
 	private int fileId;
 	private int boardId;
 	private String fileName;
-	private long filesize;
+	private long fileSize;
 	private String fileContentType;
 	private String fileUrl;
 	private LocalDateTime regDt;
@@ -29,11 +29,11 @@ public class BoardFileDto {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	public long getFilesize() {
-		return filesize;
+	public long getFileSize() {
+		return fileSize;
 	}
-	public void setFilesize(long filesize) {
-		this.filesize = filesize;
+	public void setFileSize(long fileSize) {
+		this.fileSize = fileSize;
 	}
 	public String getFileContentType() {
 		return fileContentType;
@@ -41,6 +41,7 @@ public class BoardFileDto {
 	public void setFileContentType(String fileContentType) {
 		this.fileContentType = fileContentType;
 	}
+
 	public String getFileUrl() {
 		return fileUrl;
 	}
@@ -52,5 +53,10 @@ public class BoardFileDto {
 	}
 	public void setRegDt(LocalDateTime regDt) {
 		this.regDt = regDt;
+	}
+	@Override
+	public String toString() {
+		return "boardFile [fileId=" + fileId + ", boardId=" + boardId + ", fileName=" + fileName
+				+ ", fileSize=" + fileSize + ", fileContentType=" + fileContentType + "]";
 	}
 }

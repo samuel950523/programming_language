@@ -3,10 +3,11 @@ package board.dao;
 import java.util.List;
 
 import board.dto.BoardDto;
+import board.dto.BoardFileDto;
 
 public interface BoardDao {
-	public int boardInsert(BoardDto boardDto);
-	public int boardUpdate(BoardDto boardDto);
+	public int boardInsert(BoardDto dto);
+	public int boardUpdate(BoardDto dto);
 	public int boardDelete(int boardId);
 	
 	public BoardDto boardDetail(int boardId);
@@ -16,4 +17,15 @@ public interface BoardDao {
 	
 	public List<BoardDto> boardListSearchWord(int limit, int offset, String searchWord);
 	public int boardListSearchWordTotalCnt(String searchWord);
+	
+	// New for FileUpload
+	public int boardFileInsert(BoardFileDto dto);
+	public List<BoardFileDto> boardDetailFileList(int boardId);
+	public int boardFileDelete(int boardId);
+	public List<String> boardFileUrlDeleteList(int boardId);
+	
+	// New for ReadCnt
+	public int boardUserReadCount(int boardId, int userSeq);
+	public int boardUserReadInsert(int boardId, int userSeq);
+	public int boardReadCountUpdate(int boardId);
 }

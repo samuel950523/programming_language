@@ -40,7 +40,8 @@ public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
     // /html/
     // /img/
     // /login
-    if( ! path.contains("/img/") && ! path.contains("/register") &&! path.contains("/login") ) {
+    // 
+    if( !path.contains("noticeBoard") && ! path.contains("/img/") && ! path.contains("/register") &&! path.contains("/login") ) {
         UserDto userDto = (UserDto) session.getAttribute("userDto");
 
         if(userDto == null) {

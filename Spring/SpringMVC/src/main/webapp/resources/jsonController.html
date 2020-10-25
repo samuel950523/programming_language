@@ -1,0 +1,136 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JSON Test</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+	<h1>Send JSON Test</h1>
+	<button id="sendEmp">Emp 보내기</button>
+	<button id="sendEmpList">Emp List 보내기</button>
+	
+	<br>
+	<h1>Receive JSON Test</h1>
+	<button id="receiveEmp">Emp 받기</button>
+	<button id="receiveEmpList">Emp List 받기</button>
+	
+	<h1>Send JSON With Jackson</h1>
+	<button id="sendEmpJackson">Emp 보내기 Jackson</button>
+	
+<script>
+
+var emp  = {
+	employeeId	: 1500, 
+	firstName  	: "Gil-Dong",
+	lastName	: "Hong",
+	email		: "hong@heroes.com",
+	hireDate	: "1500-05-18"
+};
+
+var empList  = [
+	{
+		employeeId	: 1600, 
+		firstName  	: "Chan-Ho",
+		lastName	: "Park",
+		email		: "hopark@heroes.com",
+		hireDate	: "1600-12-25"
+	},
+	{
+		employeeId	: 1953, 
+		firstName  	: "Boom",
+		lastName	: "Cha",
+		email		: "cha@heroes.com",
+		hireDate	: "1953-05-22"
+	},
+	{
+		employeeId	: 2001, 
+		firstName  	: "Gang-In",
+		lastName	: "Lee",
+		email		: "loveyou@heroes.com",
+		hireDate	: "2001-02-19"
+	}
+];
+
+$(document).ready(function(){
+
+	$("#sendEmp").click(function(){
+
+		$.ajax({
+	        type		: 'POST',
+	        url 		: '/mymvc/emp',
+	        data		:  JSON.stringify(emp), 
+	        contentType : 'application/json',
+	        success 	: function(data) {
+	        	console.log(data);
+	        },
+	        error		: function(error) {
+	        	console.log(error);
+	        }
+		});
+  	});
+	
+	$("#sendEmpList").click(function(){
+
+		$.ajax({
+	        type		: 'POST',
+	        url 		: '/mymvc/empList',
+	        data		:  JSON.stringify(empList), 
+	        contentType : 'application/json',
+	        success 	: function(data) {
+	        	console.log(data);
+	        },
+	        error		: function(error) {
+	        	console.log(error);
+	        }
+		});
+  	});
+	
+	$("#receiveEmp").click(function(){
+
+		$.ajax({
+	        type		: 'GET',
+	        url 		: '/mymvc/empDetail/12345',
+	        dataType : 'json',
+	        success 	: function(data) {
+	        	console.log(data);
+	        },
+	        error		: function(error) {
+	        	console.log(error);
+	        }
+		});
+  	});
+	
+	$("#receiveEmpList").click(function(){
+
+		$.ajax({
+	        type		: 'GET',
+	        url 		: '/mymvc/empList',
+	        dataType : 'json',
+	        success 	: function(data) {
+	        	console.log(data);
+	        },
+	        error		: function(error) {
+	        	console.log(error);
+	        }
+		});
+  	});
+	
+	$("#sendEmpJackson").click(function(){
+
+		$.ajax({
+	        type		: 'POST',
+	        url 		: '/mymvc/jacksonEmp',
+	        data		:  { json: JSON.stringify(emp) }, 
+	        //contentType : 'application/json',
+	        success 	: function(data) {
+	        	console.log(data);
+	        },
+	        error		: function(error) {
+	        	console.log(error);
+	        }
+		});
+  	});
+});
+</script>
+</body>
+</html>

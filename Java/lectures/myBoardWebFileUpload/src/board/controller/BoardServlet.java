@@ -1,14 +1,20 @@
 package board.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.apache.commons.io.FilenameUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -21,21 +27,24 @@ import board.service.BoardServiceImpl;
  * contextPath 고려
  */
 @WebServlet("/board/*")
+@MultipartConfig(
+	fileSizeThreshold = 1024 * 1024,
+	maxFileSize = 1024 * 1024 * 5, 
+	maxRequestSize = 1024 * 1024 * 5 * 5
+)
 public class BoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	// met
+
 	BoardService service = new BoardServiceImpl();
 	
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		
 		String contextPath = request.getContextPath();
 		String path = request.getRequestURI().substring(contextPath.length());
-
 		System.out.println(path);
 		
 		switch(path) {
@@ -48,12 +57,6 @@ public class BoardServlet extends HttpServlet {
 			case "/board/boardDelete"		: boardDelete(request, response); break;
 			default : notValidUrl();
 		}
-	}
-	
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		doPost(request, response);
 	}
 	
 	private void boardMain(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -107,6 +110,8 @@ public class BoardServlet extends HttpServlet {
 		System.out.println("BoardServlet boardListTotalCnt totalCnt : " + totalCnt);
 	}
 
+	
+	
 	private void boardInsert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		BoardDto boardDto = new BoardDto();
@@ -116,17 +121,12 @@ public class BoardServlet extends HttpServlet {
 		boardDto.setTitle(request.getParameter("title"));
 		boardDto.setContent(request.getParameter("content"));
 		
-		int ret = service.boardInsert(boardDto);
-		
-		// if cnt != 1 Exception ...
+		int boardId = service.boardInsert(boardDto, request.getParts());
+
 		Gson gson = new Gson();
+
 		JsonObject jsonObject = new JsonObject();
-		
-		if (ret == 1) {
-			jsonObject.addProperty("result", "success");
-		} else {
-			jsonObject.addProperty("result", "fail");
-		}
+		jsonObject.addProperty("result", "success");
 		
 		String jsonStr = gson.toJson(jsonObject);
 		response.getWriter().write(jsonStr);
@@ -135,9 +135,13 @@ public class BoardServlet extends HttpServlet {
 	private void boardDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		String strBoardId = request.getParameter("boardId");
-		// if strBoardId == null or "" Exception ...
+
 		int boardId = Integer.parseInt(strBoardId);
-		BoardDto boardDto = service.boardDetail(boardId);
+		
+		String strUserSeq = request.getParameter("userSeq");
+		int userSeq = Integer.parseInt(strUserSeq);
+		
+		BoardDto boardDto = service.boardDetail(boardId, userSeq);
 
 		Gson gson = new Gson();
 
@@ -149,22 +153,19 @@ public class BoardServlet extends HttpServlet {
 		
 		BoardDto boardDto = new BoardDto();
 		String strBoardId = request.getParameter("boardId");
-
+		// if strBoardId == null or "" Exception ...
 		int boardId = Integer.parseInt(strBoardId);
 		boardDto.setBoardId(boardId);
 		boardDto.setTitle(request.getParameter("title"));
 		boardDto.setContent(request.getParameter("content"));
 		
-		int ret = service.boardUpdate(boardDto);
-
-		Gson gson = new Gson();
-		JsonObject jsonObject = new JsonObject();
+		int cnt = service.boardUpdate(boardDto, request.getParts());
 		
-		if (ret == 1) {
-			jsonObject.addProperty("result", "success");
-		} else {
-			jsonObject.addProperty("result", "fail");
-		}
+		// if cnt != 1 Exception ...
+		Gson gson = new Gson();
+
+		JsonObject jsonObject = new JsonObject();
+		jsonObject.addProperty("result", "success");
 		
 		String jsonStr = gson.toJson(jsonObject);
 		response.getWriter().write(jsonStr);
@@ -175,16 +176,12 @@ public class BoardServlet extends HttpServlet {
 		String strBoardId = request.getParameter("boardId");
 		// if strBoardId == null or "" Exception ...
 		int boardId = Integer.parseInt(strBoardId);
-		int ret = service.boardDelete(boardId);
-
+		int cnt = service.boardDelete(boardId);
+		// if cnt != 1 Exception ...
 		Gson gson = new Gson();
+
 		JsonObject jsonObject = new JsonObject();
-		
-		if (ret == 1) {
-			jsonObject.addProperty("result", "success");
-		} else {
-			jsonObject.addProperty("result", "fail");
-		}
+		jsonObject.addProperty("result", "success");
 		
 		String jsonStr = gson.toJson(jsonObject);
 		response.getWriter().write(jsonStr);
