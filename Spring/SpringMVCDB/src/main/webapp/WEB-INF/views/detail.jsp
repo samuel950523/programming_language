@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.mycom.mvcdbhw.dto.QuizDto"%>
+	pageEncoding="UTF-8" import="com.mycom.mvcdb.dto.EmpDto"%>
 <%
-	QuizDto empDto = (QuizDto) request.getAttribute("empDto");
+	EmpDto empDto = (EmpDto) request.getAttribute("empDto");
 %>
 <!DOCTYPE html>
 <html>
