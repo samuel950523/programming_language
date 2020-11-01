@@ -33,8 +33,8 @@
 								alert("지역 입력!!!");
 								return;
 							} else {
-								$("#writeform").attr("action",
-										"${root}/article/write").submit();
+								$("#registForm").attr("action",
+										"${root}/regist/create").submit();
 							}
 						});
 			});
@@ -56,10 +56,12 @@
 			<option value="eu">유럽
 			<option value="na">북아메리카
 			<option value="as">아시아
-		</select> <br> 
-		<button type="button" id="writeBtn" class="btn btn-primary">확진자 현황 등록</button>
+		</select> <br>
+		<button type="button" id="writeBtn" class="btn btn-primary">확진자
+			현황 등록</button>
 		<button type="reset" class="btn btn-warning">초기화</button>
 	</form>
+	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 
 </html>

@@ -20,11 +20,12 @@
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 <h3>${msg}</h3>
 <%@ include file="/WEB-INF/views/user/login.jsp" %>
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </c:if>
 
 <c:if test="${userinfo != null}">
 <%@ include file="/WEB-INF/views/include/regist.jsp"%>
-</c:if>
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+</c:if>
 </body>
 </html>

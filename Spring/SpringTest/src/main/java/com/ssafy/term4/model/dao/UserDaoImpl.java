@@ -34,8 +34,8 @@ public class UserDaoImpl implements UserDao {
 			sql.append(" from userinfo ");
 			sql.append(" where id = ? and pw = ? ");
 			pstmt = conn.prepareStatement(sql.toString());
-			pstmt.setString(1, map.get("id"));
-			pstmt.setString(2, map.get("pw"));
+			pstmt.setString(1, map.get("userid"));
+			pstmt.setString(2, map.get("userpwd"));
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				memberDto = new MemberDto();

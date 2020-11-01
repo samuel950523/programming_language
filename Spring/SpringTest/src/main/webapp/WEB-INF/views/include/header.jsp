@@ -26,7 +26,7 @@
 		<a href="${root }">로그인 해주세요.</a>
 	</c:if>
 	<c:if test="${userinfo != null}">
-				${userinfo.username}님 로그인되었습니다. <a href="${root}/user/logout">로그아웃</a>
+				${userinfo.id}님 로그인되었습니다. <a href="${root}/user/logout">로그아웃</a>
 	</c:if>
 </div>
 <h1 id="head">국가별 확진자 현황</h1>

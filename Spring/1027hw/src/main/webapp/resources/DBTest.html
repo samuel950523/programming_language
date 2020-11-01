@@ -1,0 +1,143 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>DBTest</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+
+	<h1>Receive JSON From DB</h1>
+	<button id="btnEmpDetail">Emp 상세</button>
+
+	<button id="btnEmpList">Emp 목록</button>
+	<button id="btnEmpInsert">Emp 등록</button>
+
+	<button id="btnEmpUpdate">Emp 수정</button>
+	<button id="btnEmpDelete">Emp 삭제</button>
+
+	<button id="btnEmpInsertJSON">Emp 등록 JSON</button>
+	<button id="btnEmpDetailNormal">Emp 상세 일반</button>
+
+	<script>
+		$(document).ready(function() {
+
+			$("#btnEmpDetail").click(function() {
+
+				$.ajax({
+					type : 'GET',
+					url : '/batishw/empDetail/1500',
+					dataType : 'json',
+					success : function(data) {
+						console.log(data);
+					},
+					error : function(error) {
+						console.log(error);
+					}
+				});
+			});
+
+			$("#btnEmpDetailNormal").click(function() {
+
+				window.location.href = "/batishw/empDetailNormal/1500";
+			});
+
+			$("#btnEmpList").click(function() {
+
+				$.ajax({
+					type : 'GET',
+					url : '/batishw/empList',
+					dataType : 'json',
+					success : function(data) {
+						console.log(data);
+					},
+					error : function(error) {
+						console.log(error);
+					}
+				});
+			});
+
+			var empInsertData = {
+				employeeId : 1998,
+				firstName : "ny",
+				lastName : "Son",
+				email : "sonny@heroes.com",
+				hireDate : "2020-10-10"
+			};
+
+			$("#btnEmpInsert").click(function() {
+
+				$.ajax({
+					type : 'POST',
+					url : '/batishw/empInsert',
+					data : empInsertData,
+					//contentType : 'application/json',
+					success : function(data) {
+						console.log(data);
+					},
+					error : function(error) {
+						console.log(error);
+					}
+				});
+			});
+
+			$("#btnEmpInsertJSON").click(function() {
+
+				$.ajax({
+					type : 'POST',
+					url : '/batishw/empInsertJSON',
+					data : JSON.stringify(empInsertData),
+					contentType : 'application/json',
+					success : function(data) {
+						console.log(data);
+					},
+					error : function(error) {
+						console.log(error);
+					}
+				});
+			});
+
+			var empUpdateData = {
+				employeeId : 1998,
+				firstName : "sonny",
+				LastName : "Ul",
+				email : "ulsonny@heroes.com",
+				hireDate : "2030-10-10"
+			};
+
+			$("#btnEmpUpdate").click(function() {
+
+				$.ajax({
+					type : 'POST',
+					url : '/batishw/empUpdate',
+					data : empUpdateData,
+					success : function(data) {
+						console.log(data);
+					},
+					error : function(error) {
+						console.log(error);
+					}
+				});
+			});
+
+			$("#btnEmpDelete").click(function() {
+
+				$.ajax({
+					type : 'POST',
+					url : '/batishw/empDelete',
+					data : {
+						employeeId : 1998
+					},
+					success : function(data) {
+						console.log(data);
+					},
+					error : function(error) {
+						console.log(error);
+					}
+				});
+			});
+
+		});
+	</script>
+</body>
+</html>

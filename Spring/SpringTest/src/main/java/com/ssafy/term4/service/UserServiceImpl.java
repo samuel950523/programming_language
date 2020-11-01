@@ -17,9 +17,10 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public MemberDto login(Map<String, String> map) throws Exception {
-		if(map.get("id") == null || map.get("pw") == null)
+		System.out.println("#"+map);
+		if(map.get("userid") == null || map.get("userpwd") == null)
 			return null;
-		System.out.println(map);
+//		System.out.println(map);
 		return userDao.login(map);
 	}
 
