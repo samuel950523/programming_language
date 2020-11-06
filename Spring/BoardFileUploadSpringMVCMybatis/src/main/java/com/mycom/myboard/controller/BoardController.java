@@ -17,42 +17,62 @@ import com.mycom.myboard.service.BoardService;
 @RestController
 public class BoardController {
 
-@Autowired
-BoardService service;
+	@Autowired
+	BoardService service;
 
-private static final int SUCCESS = 1;
-private static final int FAIL = -1;
+	private static final int SUCCESS = 1;
+	private static final int FAIL = -1;
 
-@GetMapping(value = "/boards")
-private ResponseEntity<BoardResultDto> boardList(BoardParamDto boardParamDto) {
+	@GetMapping(value = "/boards")
+	private ResponseEntity<BoardResultDto> boardList(BoardParamDto boardParamDto) {
 
-    BoardResultDto boardResultDto;
-    if (boardParamDto.getSearchWord().isEmpty()) {
-        boardResultDto = service.boardList(boardParamDto);
-    } else {
-        boardResultDto = service.boardListSearchWord(boardParamDto);
-    }
+		BoardResultDto boardResultDto;
+		if (boardParamDto.getSearchWord().isEmpty()) {
+			boardResultDto = service.boardList(boardParamDto);
+		} else {
+			boardResultDto = service.boardListSearchWord(boardParamDto);
+		}
 
-    if (boardResultDto.getResult() == SUCCESS) {
-        System.out.println(boardResultDto.getDto());
+		if (boardResultDto.getResult() == SUCCESS) {
+			System.out.println(boardResultDto.getDto());
 
-        return new ResponseEntity<BoardResultDto>(boardResultDto, HttpStatus.OK);
-    } else {
-        return new ResponseEntity<BoardResultDto>(boardResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-}
+			return new ResponseEntity<BoardResultDto>(boardResultDto, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<BoardResultDto>(boardResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
+	@PostMapping(value = "/boards")
+	private ResponseEntity<BoardResultDto> boardInsert(BoardDto boardDto,
+			@RequestParam(value = "file", required = false) MultipartFile file) throws Exception {
+		BoardResultDto boardResultDto = service.boardInsert(boardDto, file);
 
-@PostMapping(value="/boards")
-private ResponseEntity<BoardResultDto> boardInsert(BoardDto boardDto , @RequestParam(value="file",required=false)MultipartFile file)
-throws Exception{
-    BoardResultDto boardResultDto  = service.boardInsert(boardDto,file);
-    
-    if(boardResultDto.getResult() == SUCCESS) {
-        return new ResponseEntity<BoardResultDto>(boardResultDto, HttpStatus.OK);
-    }else {
-        return new ResponseEntity<BoardResultDto>(boardResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-    
-} 
+		if (boardResultDto.getResult() == SUCCESS) {
+			return new ResponseEntity<BoardResultDto>(boardResultDto, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<BoardResultDto>(boardResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+	
+	// PUT + multipart/form-data (X)
+	// In RESTful,
+	// PUT & DELETE methods are defined to be idempotent
+	// 만약 글만 수정한다면?? PUT mapping OK  여러 번 수정해도 back-end 결과가 같음
+	// 첨부파일이 포함되면 idempotent 하지 않음.
+
+	@PostMapping(value="/boards/{boardId}") 
+	private ResponseEntity<BoardResultDto> boardUpdate(
+	        BoardDto boardDto, 
+	        @RequestParam(value="file", required = false) MultipartFile file){
+
+	    BoardResultDto boardResultDto = service.boardUpdate(boardDto, file);
+	    
+	    if( boardResultDto.getResult() == SUCCESS ) {
+	        return new ResponseEntity<BoardResultDto>(boardResultDto, HttpStatus.OK);
+	    }else {
+	        return new ResponseEntity<BoardResultDto>(boardResultDto, HttpStatus.INTERNAL_SERVER_ERROR);
+	    }        
+	}
+	
 }

@@ -14,4 +14,8 @@ public interface BoardService {
 	public BoardResultDto boardList(BoardParamDto boardParamDto);
 
 	public BoardResultDto boardListSearchWord(BoardParamDto boardParamDto);
+	
+	public BoardResultDto boardUpdate(BoardDto dto, MultipartFile file);
+
+
 }

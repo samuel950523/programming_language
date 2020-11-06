@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-	@GetMapping(value = { "/", "/board" })
+	@GetMapping("/board")
 	private String home() {
 		return "board/boardMain";
 	}
 
-	@GetMapping("/login")
+	@GetMapping(value = { "/", "/login" })
 	private String login() {
 		return "login";
 	}

@@ -28,9 +28,16 @@ public class BoardServiceImpl implements BoardService {
 	/* for eclipse development code */
 	// D:\SSAFY\java\eclipse\ssafy4_sts3\BoardFileUploadSpringMVCMybatis
 	
-	String uploadPath = "C:" + File.separator + "Users" + File.separator +"multicampus" + File.separator +"Desktop" + File.separator
+//	String uploadPath = "C:" + File.separator + "Users" + File.separator +"multicampus" + File.separator +"Desktop" + File.separator
+//			+ "BoardFileUploadSpringMVCMybatis" + File.separator + "src" + File.separator + "main" + File.separator
+//			+ "webapp" + File.separator + "resources" + File.separator + "static";
+	
+	// D:\VSCode\language\Spring\BoardFileUploadSpringMVCMybatis
+	
+	String uploadPath = "D:" + File.separator + "VSCode" + File.separator +"language" + File.separator +"Spring" + File.separator
 			+ "BoardFileUploadSpringMVCMybatis" + File.separator + "src" + File.separator + "main" + File.separator
 			+ "webapp" + File.separator + "resources" + File.separator + "static";
+	
 	
 	@Override
 	public BoardResultDto boardInsert(BoardDto dto, MultipartFile uploadFile) throws IOException {
@@ -46,8 +53,6 @@ public class BoardServiceImpl implements BoardService {
 				File uploadDir = new File(uploadPath + File.separator + uploadFolder);
 				if (!uploadDir.exists())
 					uploadDir.mkdir();
-
-				// String s = null; s.length();
 
 				String fileName = uploadFile.getOriginalFilename();
 
@@ -127,4 +132,63 @@ public class BoardServiceImpl implements BoardService {
 		return boardResultDto;
 	}
 
+	@Override
+    public BoardResultDto boardUpdate(BoardDto dto, MultipartFile uploadFile){
+
+        BoardResultDto boardResultDto = new BoardResultDto();
+
+    try {
+        dao.boardUpdate(dto);
+        
+        if( uploadFile != null && ! uploadFile.isEmpty() ) {
+                                    
+            File uploadDir = new File(uploadPath + File.separator + uploadFolder);
+            if (!uploadDir.exists()) uploadDir.mkdir();
+            
+            // 물리 파일 삭제, 첨부파일 여러개 고려
+            List<String> fileUrlList = dao.boardFileUrlDeleteList(dto.getBoardId());    
+            for(String fileUrl : fileUrlList) {    
+                File file = new File(uploadPath + File.separator, fileUrl);
+                if(file.exists()) {
+                    file.delete();
+                }
+            }
+
+            dao.boardFileDelete(dto.getBoardId()); // 테이블 파일 삭제
+            
+            String fileName = uploadFile.getOriginalFilename();
+    
+            //Random File Id
+            UUID uuid = UUID.randomUUID();
+        
+            //file extension
+            String extension = FilenameUtils.getExtension(fileName); // vs FilenameUtils.getBaseName()
+        
+            String savingFileName = uuid + "." + extension;
+
+            File destFile = new File(uploadPath + File.separator + uploadFolder + File.separator + savingFileName);
+            System.out.println(uploadPath + File.separator + uploadFolder + File.separator + savingFileName);
+            uploadFile.transferTo(destFile);
+        
+            // Table Insert
+            BoardFileDto boardFileDto = new BoardFileDto();
+            boardFileDto.setBoardId(dto.getBoardId());
+            boardFileDto.setFileName(fileName);
+            boardFileDto.setFileSize(uploadFile.getSize());
+            boardFileDto.setFileContentType(uploadFile.getContentType());
+            String boardFileUrl = uploadFolder + "/" + savingFileName;
+            boardFileDto.setFileUrl(boardFileUrl);
+            
+            dao.boardFileInsert(boardFileDto);
+        }
+        boardResultDto.setResult(SUCCESS);
+        
+    }catch(Exception e) {
+        e.printStackTrace();
+        boardResultDto.setResult(FAIL);
+    }
+    
+    return boardResultDto;
+}
+	
 }
