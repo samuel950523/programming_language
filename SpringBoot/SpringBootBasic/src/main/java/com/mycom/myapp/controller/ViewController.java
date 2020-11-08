@@ -7,24 +7,23 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ViewController {
-
+	
 	@RequestMapping("/view")
 	public String view() {
-		return "Boot";
+		return "boot";
 	}
 	
 	@RequestMapping("/viewModel")
 	public String viewModel(Model model) {
-		model.addAttribute("name", "ì•ˆë…•, Boot viewModel!!");
+		model.addAttribute("name", "¾È³ç, Boot viewModel!");
 		return "viewModel";
 	}
 	
 	@RequestMapping("/modelAndView")
 	public ModelAndView modelAndView() {
 		ModelAndView mav = new ModelAndView("modelAndView");
-		mav.addObject("name", "ì•ˆë…•, Boot modelAndView");
+		mav.addObject("name", "¾È³ç, Boot modelAndView!");
 		return mav;
 	}
-	
-	
+
 }

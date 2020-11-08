@@ -107,7 +107,7 @@
 	}
 	
 	function detail(studentId){
-
+		
 	}
 	
 	function makeDetailHtml(detail){

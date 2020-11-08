@@ -8,12 +8,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-	@ExceptionHandler(value=Exception.class)
-	public ModelAndView handleErrorView(HttpServletRequest req, Exception ex) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("exception", ex);
-		mav.addObject("url", req.getRequestURL());
-		mav.setViewName("error");
-		return mav;
-	}
+	
+//	@ExceptionHandler (value = Exception.class)
+//	public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("exception", e);
+//		mav.addObject("url", req.getRequestURL());
+//		mav.setViewName("error");
+//		return mav;
+//	}
+
 }
