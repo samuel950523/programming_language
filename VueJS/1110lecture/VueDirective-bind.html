@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue Directive #3</title>
+</head>
+
+<style>
+    .reddish {
+        color: crimson;
+    }
+    
+    .bgDark {
+        background-color: darkgrey;
+    }
+    
+    #picture {
+        width: 400px;
+    }
+</style>
+
+<body>
+    <div id="app1">
+
+        <div v-bind:id="bindId">{{ textId }}</div>
+        <div v-bind:class="reddish">{{ textClass }}</div>
+        <!-- check console Vue warn -->
+        <div v-bind:class="{ reddish: isReddish }">{{ textClass }}</div>
+        <div class="somClass" v-bind:class="{ bgDark: isBgDark, reddish: isReddish }">{{ textClass }}</div>
+
+        <a v-bind:href="bindUrl">{{ textUrl }}</a>
+        <br>
+
+        <div v-bind:data-boardId="boardId">6789 게시글</div>
+        <!-- Add img tag With Image With id picture -->
+        <br> {{ textSrc }}
+        <img v-bind:src="bindSrc" alt="pic" v-bind:id="picture">
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app1',
+            data: {
+                textId: 'v-bind Id',
+                bindId: '12345',
+
+                textClass: 'v-bind Class',
+                isReddish: true,
+                isBgDark: true,
+
+                textUrl: 'google.com',
+                bindUrl: 'https://google.com',
+
+                boardId: "6789",
+
+                textSrc: '111',
+                bindSrc: '111.jpg',
+                srcId: "picture",
+            }
+        });
+    </script>
+</body>
+
+</html>

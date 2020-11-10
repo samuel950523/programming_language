@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue Directive #2</title>
+</head>
+
+<body>
+    <div id="app1">
+        <div v-text="css"></div>
+        <div>{{ css }}</div>
+        <div v-html="css"></div>
+        <div v-once>{{ css }}</div>
+    </div>
+
+    <script>
+        let value = {
+            css: '<span style="background-color: light-grey;">회색</span>'
+        }
+        new Vue({
+            el: '#app1',
+            data: value
+        });
+
+        setTimeout(timerHandler, 5000);
+
+        function timerHandler() {
+            value.css = '<span style="background-color: green;">녹색</span>'
+        }
+    </script>
+</body>
+
+</html>

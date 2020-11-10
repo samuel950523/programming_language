@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Hello, Vue Data</title>
+</head>
+
+<body>
+    <div class="greeting">{{ value1 }}, {{ value2 }}</div>
+    <script>
+        new Vue({
+            el: '.greeting',
+            data: {
+                value1: "Hello",
+                value2: "Vue!!"
+            }
+        });
+    </script>
+</body>
+
+</html>

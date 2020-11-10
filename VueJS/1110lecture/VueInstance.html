@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>VueInstance</title>
+</head>
+
+<body>
+    <div id="app1">
+        {{ text1 }}
+    </div>
+
+    <div id="app2">
+        {{ text1 }}, {{ text2 }}
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app1',
+            data: {
+                text1: "안녕하세요!"
+            }
+        });
+
+        const v = new Vue({
+            data: {
+                text1: 'Hello',
+                text2: 'Vue'
+            }
+        });
+
+        v.$mount('#app2')
+    </script>
+</body>
+
+</html>

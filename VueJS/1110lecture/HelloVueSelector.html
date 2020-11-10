@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Hello, Vue Selector</title>
+</head>
+
+<body>
+    <div id="app1" class="app1">first div {{text}}</div>
+
+    <div id="app2" class="app2">second div {{text}}</div>
+    <script>
+        new Vue({
+            el: '.app2',
+            data: {
+                text: 'Hello, Vue!'
+            }
+        });
+    </script>
+</body>
+
+</html>
