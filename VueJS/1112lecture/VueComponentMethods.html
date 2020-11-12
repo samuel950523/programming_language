@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue Component Methods</title>
+</head>
+
+<body>
+    <div id="app">
+        <method-component></method-component>
+    </div>
+
+    <script>
+        var cmp1 = {
+            template: `
+            <div>
+                <div>컴포넌트 데이터 : {{ data1 }}</div>
+                <button v-on:click="func1">데이터 값 보기</button>
+            </div>
+            `,
+            data: function() {
+                return {
+                    data1: 100,
+                };
+            },
+            methods: {
+                func1: function() {
+                    alert(this.data1);
+                },
+            },
+        };
+
+        new Vue({
+            el: '#app',
+            components: {
+                'method-component': cmp1,
+            },
+        });
+    </script>
+</body>
+
+</html>

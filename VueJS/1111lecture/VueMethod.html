@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vue Method</title>
+    </head>
+    <body>
+        <div id="app1">
+            <div>{{ text }}</div>
+            <div>{{ reversedText() }}</div>
+            <div>{{ text.split('').reverse().join('') }}</div>
+            <div>{{ reversedText() }}</div>
+            <button @click="reversedText">click</button>
+        </div>
+
+        <script>
+            new Vue({
+                el: '#app1',
+                data: {
+                    text: '안녕하세요, Vue!',
+                },
+                methods: {
+                    reversedText() {
+                        console.log('reveredText is called');
+                        return this.text.split('').reverse().join('');
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>

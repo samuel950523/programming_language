@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <title>Vue Key Modifier</title>
+    </head>
+    <body>
+        <div id="app1">
+            <input
+                v-on:keyup="keyup"
+                v-on:keyup.enter="enterKey"
+                v-on:keyup.page-down="pageDown"
+                v-on:keyup.delete="deleteKey"
+            />
+            <br />
+            <span>Key Code : {{ keycode }}</span>
+            <hr />
+            <input
+                v-on:input="keyHangul=$event.target.value"
+                v-on:keyup="hangul"
+                v-on:keyup.enter="enterHangul"
+            />
+            <br />
+            <span>Key 한글 : {{ keyHangul }}</span>
+        </div>
+
+        <script>
+            new Vue({
+                el: '#app1',
+                data: {
+                    keycode: 0,
+                    keyHangul: '',
+                },
+
+                methods: {
+                    keyup: function (e) {
+                        console.log(e.key);
+                        this.keycode = e.key;
+                    },
+                    enterKey: function (e) {
+                        alert('Enter Key!!!');
+                    },
+                    pageDown: function (e) {
+                        alert('Page Down Key!!!');
+                    },
+                    deleteKey: function (e) {
+                        alert('Delete Key!!!');
+                    },
+                    hangul: function (e) {
+                        console.log(this.keyHangul);
+                    },
+                    enterHangul: function (e) {
+                        alert(this.keyHangul);
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue Event Emit Sample</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- component HTML 코드를 작성하세요. Parent 의 discountRateValue' 를 Props 로 받아서 사용합니다. -->
+        <!-- 'call-parent' event 가 component 에서 발생하면 Parent 의 'fromChild' 를 호출합니다. -->
+    </div>
+
+    <template id="product-list">
+            <table>
+                <thead>
+                    <th>제품</th>
+                    <th>가격</th>
+                    <th>할인가격</th>
+                    <th>처리</th>
+                </thead>
+                <tbody>
+                    <tr v-for="product in productList">
+                        <td>{{product.name}}</td>
+                        <td>{{product.price}}</td>
+                        <td>{{product.price - discountRate*product.price}}</td>
+                        <!-- 버튼을 추가하고 click event 에 addCart 메소드를 호출하면서 parameter 로 product 를 전달하세요. -->
+                    </tr>
+                </tbody>
+            </table>
+        </template>
+
+    <script>
+        let productList = [{
+            name: 'Tent',
+            price: 400000
+        }, {
+            name: 'Tarp',
+            price: 70000
+        }, {
+            name: 'Table',
+            price: 50000
+        }, ];
+
+        Vue.component('product-list', {
+            props: ['discountRate'],
+            template: '#product-list',
+            data: function() {
+                return {
+                    productList: productList,
+                };
+            },
+
+            // 'addCart' method 를 추가하세요.
+            // 전달된 parameter 를 부모에게 전달하기 위해 this.$emit('call-parent', product); 코드를 사용합니다.
+        });
+
+        new Vue({
+            el: '#app',
+            data: {
+                discountRateValue: 0.2,
+            },
+            // 'fromChild' method 를 추가하세요.
+            // 전달된 parameter 를 console.log 를 통해 확인하세요.
+        });
+    </script>
+</body>
+
+</html>

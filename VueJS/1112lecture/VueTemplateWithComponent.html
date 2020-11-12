@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Vue Component Basic</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app1">
+        <basic-component></basic-component>
+    </div>
+
+    <script>
+        // // #1
+        // inside Vue Instance
+        new Vue({
+            el: '#app1',
+            components: {
+                'basic-component': {
+                    template: '<div>기본 컴포넌트 1</div>',
+                },
+            },
+        });
+
+        // // #2
+        // use variable
+        // var basic = {
+        // 	template: '<div>기본 컴포넌트 2</div>'
+        // }
+
+        // new Vue({
+        // 	el: '#app1',
+        // 	components:{
+        // 		'basic-component' : basic
+        // 	}
+        // });
+
+        // #3
+        // should match Camel Expression With template tag
+        // var BasicComponent = {
+        // 	template: '<div>기본 컴포넌트 3</div>'
+        // }
+
+        // new Vue({
+        // 	el: '#app1',
+        // 	components:{
+        // 		BasicComponent
+        // 	}
+        // });
+    </script>
+</body>
+
+</html>

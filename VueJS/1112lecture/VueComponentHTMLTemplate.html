@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue Component HTML Template</title>
+</head>
+
+<body>
+    <div id="app1">
+        <div-component></div-component>
+        <table-component></table-component>
+    </div>
+
+    <template id="div-template">
+            <!---->
+            <div>HTML div Template</div>
+            <!-- <div>이것은 div tag 를 이용한 template 입니다.</div> -->
+        </template>
+    <template id="table-template">
+            <table>
+                <tr>
+                    <td>취미1</td>
+                    <td>독서</td>
+                </tr>
+                <tr>
+                    <td>취미2</td>
+                    <td>축구</td>
+                </tr>
+                <tr>
+                    <td>취미3</td>
+                    <td>캠핑</td>
+                </tr>
+            </table>
+        </template>
+
+    <script>
+        Vue.component('div-component', {
+            template: '#div-template',
+        });
+
+        Vue.component('table-component', {
+            template: '#table-template',
+        });
+
+        new Vue({
+            el: '#app1',
+        });
+    </script>
+</body>
+
+</html>

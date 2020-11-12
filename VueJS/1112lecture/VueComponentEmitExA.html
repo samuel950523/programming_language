@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue Event Emit Sample</title>
+</head>
+
+<body>
+    <div id="app">
+        <product-list v-bind:discount-rate="discountRateValue" v-on:call-parent="fromChild"></product-list>
+    </div>
+
+    <template id="product-list">
+            <table>
+                <thead>
+                    <th>제품</th>
+                    <th>가격</th>
+                    <th>할인가격</th>
+                    <th>처리</th>
+                </thead>
+                <tbody>
+                    <tr v-for="product in productList">
+                        <td>{{product.name}}</td>
+                        <td>{{product.price}}</td>
+                        <td>{{product.price - discountRate*product.price}}</td>
+                        <td>
+                            <button v-on:click="addCart(product)">show</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </template>
+
+    <script>
+        let productList = [{
+            name: 'Tent',
+            price: 400000
+        }, {
+            name: 'Tarp',
+            price: 70000
+        }, {
+            name: 'Table',
+            price: 50000
+        }, ];
+
+        Vue.component('product-list', {
+            props: ['discountRate'],
+            template: '#product-list',
+            data: function() {
+                return {
+                    productList: productList,
+                };
+            },
+            methods: {
+                addCart: function(product) {
+                    console.log(product);
+                    this.$emit('call-parent', product);
+                },
+            },
+        });
+
+        new Vue({
+            el: '#app',
+            data: {
+                discountRateValue: 0.2,
+            },
+            methods: {
+                fromChild: function(product) {
+                    console.log('received an event' + product);
+                    alert('received an event');
+                },
+            },
+        });
+    </script>
+</body>
+
+</html>

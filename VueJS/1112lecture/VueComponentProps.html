@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue Component Props</title>
+</head>
+
+<body>
+    <div id="app">
+        <child-component my-data="바로 쓰기"></child-component>
+        <child-component v-bind:parent-data="message"></child-component>
+        <child-component my-data="바로 쓰기" :parent-data="message"></child-component>
+    </div>
+
+    <script>
+        Vue.component('child-component', {
+            props: ['myData', 'parentData'],
+            template: '<p>{{ myValue }} : {{ myData }} : {{ parentData }}</p>',
+            data: function() {
+                return {
+                    myValue: 200,
+                };
+            },
+        });
+
+        new Vue({
+            el: '#app',
+            data: {
+                message: 'Message from Parent Component',
+            },
+        });
+    </script>
+</body>
+
+</html>

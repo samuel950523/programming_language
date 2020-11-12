@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Vue Component Local</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app1">
+		<local-component></local-component>
+	</div>
+
+	<div id="app2">
+		<variable-component></variable-component>
+		<!-- check error message -->
+		<!-- <local-component></local-component> -->
+	</div>
+<script>
+
+	// local component inside Vue instance
+	new Vue({
+		el: '#app1',
+		components:{
+			'local-component': {
+				template: '<div>지역 컴포넌트</div>'
+			}
+		}
+	});
+
+	const cmp = {
+		template: '<div>변수 컴포넌트</div>'
+	}
+
+	// local component outside Vue instance
+	new Vue({
+		el: '#app2',
+		components:{
+			'variable-component' : cmp
+		}
+	});
+</script>	
+</body>
+</html>

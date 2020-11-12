@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vue Filter Exercise</title>
+    </head>
+    <body>
+        <div id="app1">
+            <input v-model="phone" />
+            <span>{{ phone | removeDash }}</span>
+        </div>
+
+        <script>
+            // local
+            new Vue({
+                data: {
+                    phone: '010-1111-1111',
+                },
+                filters: {
+                    removeDash: function (value) {
+                        if (!value) return '';
+                        return value.split('-').join('');
+                    },
+                },
+            }).$mount('#app1');
+        </script>
+    </body>
+</html>

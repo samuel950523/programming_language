@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue Component Emit</title>
+</head>
+
+<body>
+    <div id="app">
+        <child-component v-on:call-parent="fromChild"></child-component>
+    </div>
+
+    <script>
+        Vue.component('child-component', {
+            template: '<button v-on:click="eventBtnClick">show</button>',
+            methods: {
+                eventBtnClick: function() {
+                    this.$emit('call-parent');
+                },
+            },
+        });
+
+        new Vue({
+            methods: {
+                fromChild: function() {
+                    alert('fromChild is called!!');
+                },
+            },
+        }).$mount('#app');
+    </script>
+</body>
+
+</html>

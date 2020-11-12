@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <title>Vue Directive v-model modifier</title>
+    </head>
+    <body>
+        <div id="app1">
+            <h4>lazy</h4>
+            <input v-model.lazy="lazyText" />
+            {{ typeof lazyText }} - {{ lazyText }}
+
+            <h4>number</h4>
+            <input v-model.number="numberText" type="text" />
+            {{ typeof numberText }} - {{ numberText }}
+
+            <h4>trim</h4>
+            <input v-model.trim="trimText" type="text" />
+            {{ '>>>>>' + trimText + '<<<<<' }}
+        </div>
+
+        <script>
+            new Vue({
+                el: '#app1',
+                data: {
+                    lazyText: '안녕',
+                    numberText: '0',
+                    trimText: '',
+                },
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vue Computed Exercise</title>
+    </head>
+    <body>
+        <div id="app1">
+            <input type="text" v-model.number="num1" />
+            <input type="text" v-model.number="num2" />
+
+            <span>+ : {{ plus }}</span> &nbsp;&nbsp;&nbsp;
+            <span>- : {{ minus }}</span> &nbsp;&nbsp;&nbsp;
+            <span>x : {{ multiple }}</span> &nbsp;&nbsp;&nbsp;
+            <span>/ : {{ divison }}</span>
+        </div>
+    </body>
+
+    <script>
+        console.log(0 == '0');
+        console.log(0 == '');
+        console.log(0 === '0');
+        console.log(0 === '');
+        new Vue({
+            el: '#app1',
+            data: {
+                num1: 0,
+                num2: 0,
+            },
+            computed: {
+                plus: function () {
+                    return this.num1 + this.num2;
+                },
+                minus: function () {
+                    return this.num1 - this.num2;
+                },
+                multiple: function () {
+                    return this.num1 * this.num2;
+                },
+                divison: function () {
+                    if (this.num2 === 0) {
+                        return 0;
+                    }
+                    return this.num1 / this.num2;
+                },
+            },
+        });
+    </script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vue Filter Chain & Argument</title>
+    </head>
+    <body>
+        <div id="app1">
+            <input v-model="name" />
+            <span>{{ name | capitalize | removeChar('-') }}</span>
+        </div>
+
+        <script>
+            // Global
+            Vue.filter('capitalize', function (value) {
+                if (!value) return '';
+                value = value.toString();
+                return value.toUpperCase();
+            });
+
+            new Vue({
+                el: '#app1',
+                data: {
+                    name: 'a-b-c-d-e-f',
+                },
+                filters: {
+                    removeChar: function (value, char) {
+                        if (!value) return '';
+                        value = value.toString();
+                        return value.split(char).join('');
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>

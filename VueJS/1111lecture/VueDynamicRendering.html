@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vue Directive Dynamic Rendering</title>
+    </head>
+    <body>
+        <div id="app1">
+            <h4>Select - Dynamic Option Rendering</h4>
+            <select>
+                <option disabled value="">Select Your Hobby</option>
+                <option v-for="option in selectOptionList" v-bind:value="option.value">
+                    {{ option.text }}
+                </option>
+            </select>
+
+            <hr />
+
+            <h4>Table - Dynamic Tr Rendering</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in trList" v-bind:data-no="item.no">
+                        <td>{{ item.no }}</td>
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.writer }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr />
+
+            <h4>Table - Pair</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>이름</th>
+                        <th>국가</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="player in trPlayerList" v-bind:data-no="player.no">
+                        <td>{{ player.no }}</td>
+                        <td>{{ player.name }}</td>
+                        <td>{{ player.country }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr />
+
+            <h4>Table - Pair (JunHo)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>가격</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="book in trJunHo" v-bind:data-no="book.no">
+                        <td>{{ book.Book_no }}</td>
+                        <td>{{ book.jaemok }}</td>
+                        <td>{{ book.price }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr />
+
+            <h4>Table - Pair (EunSun)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작가</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="movie in trEunSun" v-bind:data-no="movie.no">
+                        <td>{{ movie.no }}</td>
+                        <td>{{ movie.title }}</td>
+                        <td>{{ movie.writer }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <script>
+            let itemList = [
+                { no: 1, title: '안녕하세요', writer: 'SSAFY' },
+                { no: 2, title: 'Vue 과정 소개', writer: '김대섭' },
+                { no: 3, title: '새로운 세상', writer: '삐따기' },
+            ];
+
+            let playerList = [
+                { no: 1, name: '이강인', country: '대한민국' },
+                { no: 2, name: '메시', country: '아르헨티나' },
+                { no: 3, name: '김대섭', country: '대한민국' },
+            ];
+
+            let BookList = [
+                { Book_no: 1, jaemok: 'Harry Potter and JUNHO', price: '15000' },
+                { Book_no: 2, jaemok: '신나지않은 싸피세상', price: '21400' },
+                { Book_no: 3, jaemok: '삼성의 성공전략', price: '155000000' },
+            ];
+
+            let movieList = [
+                { no: 1, title: '삼진그룹 영어토익반', writer: '홍수영,손미' },
+                { no: 2, title: '도굴', writer: '류선규' },
+                { no: 3, title: '내가 죽던 날 ', writer: '박지완' },
+            ];
+
+            new Vue({
+                el: '#app1',
+                data: {
+                    selectOptionList: [
+                        { text: 'Camping', value: 'C' },
+                        { text: 'Drawing', value: 'D' },
+                        { text: 'Singing', value: 'S' },
+                    ],
+                    trList: itemList,
+                    trPlayerList: playerList,
+                    trJunHo: BookList,
+                    trEunSun: movieList,
+                },
+            });
+        </script>
+    </body>
+</html>

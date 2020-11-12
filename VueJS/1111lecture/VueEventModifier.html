@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <title>Vue Event Modifier</title>
+    </head>
+    <body>
+        <div id="app1">
+            <form target="_blank" action="http://www.naver.com">
+                <input v-model="inputText1" type="text" />
+                <button type="submit" v-on:click="callSubmit">전송</button>
+            </form>
+
+            <form
+                @submit.prevent="callSubmit2"
+                target="_blank"
+                action="http://www.naver.com"
+                id="form2"
+            >
+                <input v-model="inputText2" type="text" />
+                <button type="submit">전송</button>
+            </form>
+
+            <form @submit="callSubmit3" @submit.prevent>
+                <input v-model="inputText3" type="text" />
+                <button type="submit">전송</button>
+            </form>
+        </div>
+
+        <script>
+            new Vue({
+                el: '#app1',
+                data: {
+                    inputText1: '',
+                    inputText2: '',
+                    inputText3: '',
+                },
+                methods: {
+                    callSubmit: function (e) {
+                        if (this.inputText1 == '') {
+                            e.preventDefault();
+                        }
+                    },
+                    callSubmit2: function (e) {
+                        if (this.inputText2 != '') {
+                            document.getElementById('form2').submit();
+                        }
+                    },
+                    callSubmit3: function (e) {
+                        if (this.inputText3 != '') {
+                            alert('do HTTP request');
+                        }
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>

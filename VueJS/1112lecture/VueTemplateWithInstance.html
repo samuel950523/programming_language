@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue Template With Instance</title>
+</head>
+<body>
+
+    <div id="app1">
+        <h4>{{ message }}</h4>
+    </div>
+
+    <!-- Empty div, but rendered template-->
+    <div id="app2"></div>
+
+    <script>
+        // no template
+        new Vue({
+            el: '#app1',
+            data: {
+                message: 'Hello, Vue Template!'
+            }
+        });
+
+        // use template
+        new Vue({
+            el: '#app2',
+            data: {
+                message: 'Hello, Vue Template!',
+                desc: '긴 HTML 내용을 String Concatanation 하지 말고 backtick 을 이용해서 표현하면 편리합니다.'
+            },
+            //simple
+            //template: '<h4>{{ message }} </h4>'
+            //complex but two root element, to fix it, wrap with one root element like <div>
+            template:
+                `<div><h4>{{ message }}</h4>
+                 <p>{{ desc }}</p></div>`
+        });
+    </script>
+</body>
+</html>

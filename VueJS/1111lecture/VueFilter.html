@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vue Filter</title>
+    </head>
+    <body>
+        <div id="app1">
+            <input v-model="name" />
+            <span>{{ name | capitalizeFirst }}</span>
+        </div>
+
+        <script>
+            // Global
+            // Vue.filter('capitalizeFirst', function (value) {
+            //     if (!value) return '';
+            //     return value.charAt(0).toUpperCase() + value.slice(1);
+            // });
+
+            // new Vue({
+            //     el: '#app1',
+            //     data: {
+            //         name: 'hong',
+            //         phone: '010-2222-2222',
+            //     },
+            // });
+
+            // local
+            new Vue({
+                el: '#app1',
+                data: {
+                    name: 'hong',
+                    phone: '010-2222-2222',
+                },
+                filters: {
+                    capitalizeFirst: function (value) {
+                        if (!value) return '';
+                        return value.charAt(0).toUpperCase() + value.slice(1);
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>

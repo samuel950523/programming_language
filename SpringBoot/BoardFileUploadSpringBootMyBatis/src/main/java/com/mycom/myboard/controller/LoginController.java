@@ -26,5 +26,6 @@ public class LoginController {
 			return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
 		}
 		return new ResponseEntity<UserDto>(userDto, HttpStatus.NOT_FOUND);
+
 	}
 }
