@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+        <title>Vue Router</title>
+    </head>
+    <body>
+        <div id="app" class="container">
+            <nav-header></nav-header>
+            <router-view></router-view>
+        </div>
+        <script type="module">
+            import NavHeader from './components/NavHeader.js';
+            import Login from './components/Login.js';
+            import Main from './components/Main.js';
+
+            var router = new VueRouter({
+                // mode : 'history',
+                routes: [
+                    {
+                        path: '/',
+                        component: Main,
+                    },
+                    {
+                        path: '/login',
+                        component: Login,
+                    },
+                    {
+                        path: '/main',
+                        component: Main,
+                    },
+                ],
+            });
+
+            new Vue({
+                el: '#app',
+                router,
+                components: {
+                    NavHeader,
+                },
+            });
+        </script>
+    </body>
+</html>

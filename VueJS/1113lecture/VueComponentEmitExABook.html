@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <title>Vue Event Emit Sample</title>
+    </head>
+
+    <body>
+        <div id="app">
+            <book-list
+                v-bind:discount-rate="discountRateValue"
+                v-on:update-cart-list="changeCartList"
+            ></book-list>
+            <cart-list></cart-list>
+        </div>
+
+        <template id="book-list">
+            <table>
+                <thead>
+                    <th>제품</th>
+                    <th>가격</th>
+                    <th>할인가격</th>
+                    <th>처리</th>
+                </thead>
+                <tbody>
+                    <tr v-for="(book,index) in bookList" v-bind:key="index">
+                        <td>{{book.name}}</td>
+                        <td>{{book.price}}</td>
+                        <td>{{book.price - discountRate*book.price}}</td>
+                        <td>
+                            <button
+                                v-on:click="addCart(book, book.price - discountRate*book.price)"
+                            >
+                                addCart
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </template>
+
+        <template id="cart-list">
+            <div>
+                <h4>Cart List</h4>
+                <table>
+                    <thead>
+                        <th>제품</th>
+                        <th>판매가격</th>
+                        <th>개수</th>
+                        <th>처리</th>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item, index) in cartList" v-bind:key="index">
+                            <td>{{item.name}}</td>
+                            <td>{{item.salePrice}}</td>
+                            <td>{{item.count}}</td>
+                            <td>
+                                <button v-on:click="removeCart(index)">removeCart</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+
+        <script>
+            let bookList = [
+                {
+                    name: 'Java',
+                    price: 400000,
+                },
+                {
+                    name: 'Spring',
+                    price: 70000,
+                },
+                {
+                    name: 'Vue',
+                    price: 50000,
+                },
+            ];
+
+            Vue.component('book-list', {
+                props: ['discountRate'],
+                template: '#book-list',
+                data: function () {
+                    return {
+                        bookList: bookList,
+                    };
+                },
+                methods: {
+                    addCart: function (book, salePrice) {
+                        console.log('addCart : request update-cart-list');
+                        this.$emit('update-cart-list', book, salePrice);
+                    },
+                },
+            });
+
+            let cartList = [
+                {
+                    name: 'Java',
+                    salePrice: 400000,
+                    count: 3,
+                },
+            ];
+
+            Vue.component('cart-list', {
+                template: '#cart-list',
+                data: function () {
+                    return {
+                        cartList: cartList,
+                    };
+                },
+                methods: {
+                    removeCart: function (index) {
+                        cartList.splice(index, 1);
+                    },
+                },
+            });
+
+            new Vue({
+                el: '#app',
+                data: {
+                    discountRateValue: 0.2,
+                },
+                methods: {
+                    changeCartList: function (item, salePrice) {
+                        for (book of cartList) {
+                            if (book.name == item.name) {
+                                book.count++;
+                                return;
+                            }
+                        }
+
+                        cartList.push({ name: item.name, salePrice: salePrice, count: 1 });
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>

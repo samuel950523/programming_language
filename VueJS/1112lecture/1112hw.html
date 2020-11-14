@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>1112 hw</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>책 목록</h2>
+        <book-list v-bind:discount-rate="discountRateValue" v-on:call-parent="fromChild"></book-list>
+        <hr />
+        <h2>장바구니</h2>
+        <book-cart v-bind:discount-rate="discountRateValue" v-bind:cart-list="cartList" v-bind:total-price="totalPrice" v-on:call-delete="deleteFromCart"></book-cart>
+    </div>
+
+    <template id="book-list">
+            <table>
+                <thead>
+                    <th>제품</th>
+                    <th>가격</th>
+                    <th>할인가격</th>
+                    <th>장바구니에 담기</th>
+                </thead>
+                <tbody>
+                    <tr v-for="book in bookList">
+                        <td>{{book.name}}</td>
+                        <td>{{book.price}}</td>
+                        <td>{{book.price - discountRate*book.price}}</td>
+                        <td>
+                            <button v-on:click="addCart(book)">담기</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </template>
+
+    <template id="book-cart">
+            <div>
+                <table>
+                    <thead>
+                        <th>제품</th>
+                        <th>할인 후 가격</th>
+                    </thead>
+                    <tbody>
+                        <tr v-for="book in cartList">
+                            <td>{{book.name}}</td>
+                            <td>{{book.price - discountRate*book.price}}</td>
+                            <td>
+                                <button v-on:click="deleteCart(book)">
+                                    삭제
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>합산가격 : {{ totalPrice }}</p>
+            </div>
+        </template>
+
+    <script>
+        let bookList = [{
+            name: '해리포터',
+            price: 7000,
+        }, {
+            name: '자바 프로그래밍',
+            price: 20000,
+        }, {
+            name: '재미있는 웹',
+            price: 40000,
+        }, {
+            name: '재미없는 알고리즘',
+            price: 500,
+        }, ];
+
+        Vue.component('book-list', {
+            props: ['discountRate'],
+            template: '#book-list',
+            data: function() {
+                return {
+                    bookList: bookList,
+                };
+            },
+            methods: {
+                addCart: function(book) {
+                    console.log(book);
+                    this.$emit('call-parent', book);
+                },
+            },
+        });
+
+        Vue.component('book-cart', {
+            props: ['discountRate', 'totalPrice', 'cartList'],
+            template: '#book-cart',
+            methods: {
+                deleteCart: function(book) {
+                    console.log(book);
+                    this.$emit('call-delete', book);
+                },
+            },
+        });
+
+        new Vue({
+            el: '#app',
+            data: {
+                discountRateValue: 0.2,
+                totalPrice: 0,
+                cartList: [],
+            },
+            methods: {
+                fromChild: function(book) {
+                    console.log(book.name + '추가');
+                    //alert('장바구니에 추가되었습니다.');
+                    this.cartList.push(book);
+                    this.totalPrice +=
+                        book.price - book.price * this.discountRateValue;
+                },
+                deleteFromCart: function(book) {
+                    console.log(book.name + '삭제');
+                    this.cartList.splice(this.cartList.indexOf(book), 1);
+                    this.totalPrice -=
+                        book.price - book.price * this.discountRateValue;
+                },
+            },
+        });
+    </script>
+</body>
+
+</html>

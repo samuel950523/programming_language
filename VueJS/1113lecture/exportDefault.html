@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>export default</title>
+    </head>
+    <body>
+        <h4>Export default test checkout console</h4>
+        <script type="module">
+            import Default from './exportDefault-1.js';
+            import My from './exportDefault-2.js'; // with Alias
+            console.log(Default);
+            console.log(My);
+            My.func1();
+        </script>
+    </body>
+</html>

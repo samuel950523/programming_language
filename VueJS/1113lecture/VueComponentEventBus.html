@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <title>Vue Component Event Bus</title>
+    </head>
+
+    <body>
+        <div id="app">
+            <product></product>
+            <cart></cart>
+        </div>
+        <template id="product">
+            <div>
+                <div>Tent 가격 {{ price }} 수량 {{ count }}</div>
+                <button @click="addCart">장바구니</button>
+            </div>
+        </template>
+        <template id="cart">
+            <div>전체 가격 {{ totalPrice }} 전체 수량 {{ totalCount }}</div>
+        </template>
+    </body>
+
+    <script>
+        const bus = new Vue();
+
+        Vue.component('product', {
+            template: '#product',
+            data() {
+                return {
+                    price: 2000,
+                    count: 1,
+                };
+            },
+            methods: {
+                addCart() {
+                    // use bus
+                    bus.$emit('addCart', this.price, this.count);
+                },
+            },
+        });
+
+        Vue.component('cart', {
+            template: '#cart',
+            data() {
+                return {
+                    totalPrice: 0,
+                    totalCount: 0,
+                };
+            },
+            methods: {
+                update(price, count) {
+                    this.totalPrice += price;
+                    this.totalCount += count;
+                },
+            },
+            created: function () {
+                // register event listener
+                bus.$on('addCart', this.update);
+            },
+        });
+        new Vue({
+            el: '#app',
+        });
+    </script>
+</html>

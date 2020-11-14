@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+        <script src="https://cdn.ckeditor.com/ckeditor5/19.0.0/classic/ckeditor.js"></script>
+
+        <title>Vue Router</title>
+        <style>
+            .router-link-exact-active {
+                color: red;
+            }
+            .ck-editor__editable {
+                min-height: 300px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app" class="container">
+            <router-view name="NavBar"></router-view>
+            <router-view></router-view>
+            <router-view name="Footer"></router-view>
+        </div>
+
+        <script type="module">
+            import router from './App.js';
+
+            new Vue({
+                el: '#app',
+                router,
+            });
+        </script>
+    </body>
+</html>
