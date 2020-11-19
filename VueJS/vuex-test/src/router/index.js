@@ -12,58 +12,57 @@ import Step07 from "../views/Step07.vue";
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
-  {
-    path: "/step00",
-    name: "Step00",
-    component: Step00,
-  },
-  {
-    path: "/step01",
-    name: "Step01",
-    component: Step01,
-  },
-  {
-    path: "/step02",
-    name: "Step02",
-    component: Step02,
-  },
-  {
-    path: "/step03",
-    name: "Step03",
-    component: Step03,
-  },
-  {
-    path: "/step04",
-    name: "Step04",
-    component: Step04,
-  },
-  {
-    path: "/step05",
-    name: "Step05",
-    component: Step05,
-  },
-  {
-    path: "/step06",
-    name: "Step06",
-    component: Step06,
-  },
-  {
-    path: "/step07",
-    name: "Step07",
-    component: Step07,
-  },
+const routes = [{
+        path: "/",
+        name: "Home",
+        component: Home,
+    },
+    {
+        path: "/step00",
+        name: "Step00",
+        component: Step00,
+    },
+    {
+        path: "/step01",
+        name: "Step01",
+        component: Step01,
+    },
+    {
+        path: "/step02",
+        name: "Step02",
+        component: Step02,
+    },
+    {
+        path: "/step03",
+        name: "Step03",
+        component: Step03,
+    },
+    {
+        path: "/step04",
+        name: "Step04",
+        component: Step04,
+    },
+    {
+        path: "/step05",
+        name: "Step05",
+        component: Step05,
+    },
+    {
+        path: "/step06",
+        name: "Step06",
+        component: Step06,
+    },
+    {
+        path: "/step07",
+        name: "Step07",
+        component: Step07,
+    },
 ];
 
 const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes,
+    mode: "history",
+    base: process.env.BASE_URL,
+    routes,
 });
 
 export default router;
