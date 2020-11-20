@@ -59,6 +59,8 @@
 
 <script>
 import { gugunCode, dongCode } from "../assets/map.js"; // static 배열 import
+import { loc } from "../assets/loc.js";
+import { aptDeal } from "../assets/aptDeal.js";
 
 var gugunList = [
     {
@@ -74,12 +76,14 @@ var dongList = [
         dong: "선택",
     },
 ];
+var change = "";
 
 export default {
     data() {
         return {
             gugunList: gugunList,
             dongList: dongList,
+            change: change,
         };
     },
     methods: {
@@ -100,12 +104,9 @@ export default {
                     gugunList.push(gugunCode[i]); // push 해줌
                 }
             }
-
-            // console.log(gugunList);
         },
         gugunChange(event) {
             let val = gugunCode[event.target.value - 1].gugun_code; // 구군코드 5자리가 받아짐
-            // console.log(gugunCode[val]);
             dongList.length = 0; // 동 배열 초기화
             dongList.push({
                 dongcode: "0",
@@ -113,7 +114,6 @@ export default {
                 gugun: "",
                 dong: "선택",
             });
-            // console.log("Val " + val);
 
             for (let i = 0; i < dongCode.length; i++) {
                 // 배열 탐색
@@ -122,13 +122,47 @@ export default {
                     dongList.push(dongCode[i]); // push 해줌
                 }
             }
-            // console.log(dongList);
         },
 
         dongChange(event) {
-            let val = event.target.value;
-            console.log(val);
-            // 여기에 검색 기능 추가
+            let dongName = 0;
+            dongName = dongList[event.target.value].dong;
+
+            // console.log(dongName);
+            // loc.js에서 맞는 동들 찾음
+            var lat = 0;
+            var lng = 0;
+            var cnt = 0;
+            var positions = [];
+            var aptList = [];
+            // 매물들의 좌표
+            for (let i = 0; i < loc.length; i++) {
+                if (loc[i].dong == dongName) {
+                    lat += parseFloat(loc[i].lat);
+                    lng += parseFloat(loc[i].lng);
+                    cnt++;
+                    positions.push({ lat: loc[i].lat, lng: loc[i].lng });
+                }
+            }
+
+            // 매물들의 상세 정보
+            for (let i = 0; i < aptDeal.length; i++) {
+                if (aptDeal[i].dong == dongName) {
+                    aptList.push(aptDeal[i]);
+                }
+            }
+
+            lat = parseFloat(lat / cnt); // 이 데이터를
+            lng = parseFloat(lng / cnt); // kakaoMap.vue로 넘겨주어야함
+            // console.log(lat + " " + lng);
+
+            change = dongName;
+            // console.log("aptList " + aptList);
+            this.$store.commit("latVal", { lat });
+            this.$store.commit("lngVal", { lng });
+            this.$store.commit("isChange", { change });
+            this.$store.commit("positions", { positions });
+            this.$store.commit("aptList", { aptList });
         },
     },
 };

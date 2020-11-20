@@ -1,63 +1,28 @@
 <template>
     <div class="content">
-        <div class="map" id="map"></div>
+        <div>
+            <kakao-map />
+        </div>
         <div class="search">
             <select-code />
         </div>
 
         <div class="list">
-            <table class="table table-hover mt-2">
-                <thead>
-                    <tr>
-                        <th>법정동</th>
-                        <th>아파트이름</th>
-                        <th>지번</th>
-                        <th>지역코드</th>
-                        <th>위도</th>
-                        <th>경도</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+            <apt-list />
         </div>
     </div>
 </template>
 
 <script>
 import selectCode from "../components/selectCode.vue";
+import kakaoMap from "../components/kakaoMap.vue";
+import aptList from "../components/aptList.vue";
 // import { sidoCode, gugunCode, dongCode } from "../assets/map.js";
 
 export default {
-    components: { selectCode },
+    components: { selectCode, kakaoMap, aptList },
     name: "Map_",
-    mounted() {
-        window.kakao && window.kakao.maps
-            ? this.initMap()
-            : this.addKakaoMapScript();
-    },
-    methods: {
-        addKakaoMapScript() {
-            const script = document.createElement("script");
-            /* global kakao */
-            script.onload = () => kakao.maps.load(this.initMap);
-            script.src =
-                "http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=278146fb736e61be5c8d95d8b24bc1c0";
-            document.head.appendChild(script);
-        },
-        initMap() {
-            var container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
-            var options = {
-                //지도를 생성할 때 필요한 기본 옵션
-                center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-                level: 3, //지도의 레벨(확대, 축소 정도)
-            };
-
-            // var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-            new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-        },
-    },
 };
-// import { multi, map, initMap, addMarker, callHouseDealInfo } from '../assets/map.js'
 </script>
 
 <style>
