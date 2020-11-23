@@ -58,9 +58,10 @@
 </template>
 
 <script>
+import axios from "axios";
 import { gugunCode, dongCode } from "../assets/map.js"; // static 배열 import
 import { loc } from "../assets/loc.js";
-import { aptDeal } from "../assets/aptDeal.js";
+// import { aptDeal } from "../assets/aptDeal.js";
 
 var gugunList = [
     {
@@ -78,12 +79,23 @@ var dongList = [
 ];
 var change = "";
 
+var lat = 0;
+var lng = 0;
+var cnt = 0;
+var positions = [];
+var aptList = [];
 export default {
     data() {
         return {
             gugunList: gugunList,
             dongList: dongList,
             change: change,
+            dongCode: "",
+            lat: lat,
+            lng: lng,
+            cnt: cnt,
+            positions: positions,
+            aptList: aptList,
         };
     },
     methods: {
@@ -123,18 +135,29 @@ export default {
                 }
             }
         },
-
-        dongChange(event) {
+        makelistprops: function (houses) {
+            var result = [];
+            for (var i in houses.data) {
+                result.push({
+                    dong: houses.data[i].dong,
+                    aptName: houses.data[i].aptName,
+                    dealAmount: houses.data[i].dealAmount.trim(),
+                    area: houses.data[i].area,
+                    floor: houses.data[i].floor,
+                    buildYear: houses.data[i].buildYear,
+                    // status: "created",
+                });
+            }
+            return result;
+        },
+        dongChange: async function (event) {
             let dongName = 0;
             dongName = dongList[event.target.value].dong;
 
             // console.log(dongName);
             // loc.js에서 맞는 동들 찾음
-            var lat = 0;
-            var lng = 0;
-            var cnt = 0;
-            var positions = [];
-            var aptList = [];
+
+            // loc에는 서울의 모든 아파트 좌표들이 다 들어있다.
             // 매물들의 좌표
             for (let i = 0; i < loc.length; i++) {
                 if (loc[i].dong == dongName) {
@@ -145,19 +168,37 @@ export default {
                 }
             }
 
-            // 매물들의 상세 정보
-            for (let i = 0; i < aptDeal.length; i++) {
-                if (aptDeal[i].dong == dongName) {
-                    aptList.push(aptDeal[i]);
-                }
-            }
-
             lat = parseFloat(lat / cnt); // 이 데이터를
             lng = parseFloat(lng / cnt); // kakaoMap.vue로 넘겨주어야함
-            // console.log(lat + " " + lng);
+
+            // 매물들의 상세 정보
+            // 여기는 DB에서 받아와야한다.
+
+            const showAptlist = (params) => {
+                return new Promise((resolve) => {
+                    try {
+                        const result = axios.get(
+                            `http://127.0.0.1:8080/getAptInDong?dongName=${params}`,
+                            {
+                                params: params, // 여기에 동 이름을 넣는 것
+                            }
+                            // axiosConfig
+                        );
+                        resolve(result);
+                    } catch (error) {
+                        resolve(false);
+                    }
+                });
+            };
+            const result = await showAptlist(dongName); // await는 비동기로 제어하기 위해 쓰는 것
+            const data = this.makelistprops(result);
+
+            var aptList = [];
+            for (var i in data) {
+                aptList.push(data[i]);
+            }
 
             change = dongName;
-            // console.log("aptList " + aptList);
             this.$store.commit("latVal", { lat });
             this.$store.commit("lngVal", { lng });
             this.$store.commit("isChange", { change });

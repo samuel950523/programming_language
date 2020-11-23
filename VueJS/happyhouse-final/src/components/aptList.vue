@@ -6,20 +6,20 @@
                 <tr>
                     <th>법정동</th>
                     <th>아파트이름</th>
-                    <th>지번</th>
-                    <th>지역코드</th>
                     <th>가격</th>
                     <th>넓이</th>
+                    <th>층</th>
+                    <th>건축년도</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(task, index) in getAptList" :key="index">
                     <td>{{ task.dong }}</td>
-                    <td>{{ task.AptName }}</td>
-                    <td>{{ task.jibun }}</td>
-                    <td>{{ task.code }}</td>
+                    <td>{{ task.aptName }}</td>
                     <td>{{ task.dealAmount }}</td>
                     <td>{{ task.area }}</td>
+                    <td>{{ task.floor }}</td>
+                    <td>{{ task.buildYear }}</td>
                 </tr>
             </tbody>
         </table>
@@ -31,6 +31,7 @@ import store from "../store/index.js";
 export default {
     computed: {
         getAptList() {
+            console.log(store.state.aptList);
             return store.state.aptList;
         },
     },
