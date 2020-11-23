@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form action="/action_page.php">
+        <form>
             <label class="badge badge-secondary">시</label>
             <select @change="sidoChange($event)" id="sido">
                 <option value="0">선택</option>
@@ -37,7 +37,7 @@
             <br />
             <br />
             <label class="badge badge-secondary">동</label>
-            <select @change="dongChange($event)" id="dong">
+            <select @change="isDongChange($event)" id="dong">
                 <option
                     v-for="(dong, dongcode) in dongList"
                     :value="dongcode"
@@ -47,12 +47,8 @@
                 </option>
             </select>
             <label class="badge badge-secondary">아파트이름</label>
-            <input
-                type="text"
-                id="aptdetail"
-                name="aptdetail"
-                style="margin: 50px 20px 0 50px"
-            /><br />
+            <input type="text" @input="aptSearch($event)" id="aptSearch" />
+            <br />
         </form>
     </div>
 </template>
@@ -77,25 +73,29 @@ var dongList = [
         dong: "선택",
     },
 ];
-var change = "";
+var dongChange = "";
+var aptChange = "";
 
 var lat = 0;
 var lng = 0;
 var cnt = 0;
 var positions = [];
 var aptList = [];
+var aptNameInput = "";
 export default {
     data() {
         return {
             gugunList: gugunList,
             dongList: dongList,
-            change: change,
+            dongChange: dongChange,
+            aptChange: aptChange,
             dongCode: "",
             lat: lat,
             lng: lng,
             cnt: cnt,
             positions: positions,
             aptList: aptList,
+            aptNameInput: aptNameInput,
         };
     },
     methods: {
@@ -150,21 +150,27 @@ export default {
             }
             return result;
         },
-        dongChange: async function (event) {
+        isDongChange: async function (event) {
             let dongName = 0;
             dongName = dongList[event.target.value].dong;
 
-            // console.log(dongName);
             // loc.js에서 맞는 동들 찾음
 
             // loc에는 서울의 모든 아파트 좌표들이 다 들어있다.
             // 매물들의 좌표
+            var lat = 0;
+            var lng = 0;
+            var cnt = 0;
             for (let i = 0; i < loc.length; i++) {
                 if (loc[i].dong == dongName) {
                     lat += parseFloat(loc[i].lat);
                     lng += parseFloat(loc[i].lng);
                     cnt++;
-                    positions.push({ lat: loc[i].lat, lng: loc[i].lng });
+                    positions.push({
+                        lat: loc[i].lat,
+                        lng: loc[i].lng,
+                        aptName: loc[i].AptName,
+                    });
                 }
             }
 
@@ -198,10 +204,82 @@ export default {
                 aptList.push(data[i]);
             }
 
-            change = dongName;
+            dongChange = dongName;
+
+            // store로 보내기
             this.$store.commit("latVal", { lat });
             this.$store.commit("lngVal", { lng });
-            this.$store.commit("isChange", { change });
+            this.$store.commit("isDongChange", { dongChange });
+            this.$store.commit("positions", { positions });
+            this.$store.commit("aptList", { aptList });
+        },
+
+        aptSearch: async function (event) {
+            // 아파트명으로 검색
+            let aptName = event.target.value;
+            const showAptSearchlist = (dong, name) => {
+                return new Promise((resolve) => {
+                    try {
+                        const result = axios.get(
+                            `http://127.0.0.1:8080/getAptSearch?info=${[
+                                dong,
+                                name,
+                            ]}`,
+                            {
+                                dong: dong,
+                                name: name,
+                            }
+                            // axiosConfig
+                        );
+                        resolve(result);
+                    } catch (error) {
+                        resolve(false);
+                    }
+                });
+            };
+
+            const result = await showAptSearchlist(
+                this.$store.state.dongChange,
+                aptName
+            ); // await는 비동기로 제어하기 위해 쓰는 것
+            const data = this.makelistprops(result);
+            var aptList = [];
+            for (var i in data) {
+                aptList.push(data[i]);
+            }
+
+            var lat = 0;
+            var lng = 0;
+            var cnt = 0;
+            var positions = [];
+
+            for (let i = 0; i < loc.length; i++) {
+                if (
+                    loc[i].dong == this.$store.state.dongChange &&
+                    loc[i].AptName.includes(aptName)
+                ) {
+                    console.log(loc[i].AptName + " " + aptName);
+                    lat += parseFloat(loc[i].lat);
+                    lng += parseFloat(loc[i].lng);
+                    cnt++;
+                    positions.push({
+                        lat: loc[i].lat,
+                        lng: loc[i].lng,
+                        aptName: loc[i].AptName,
+                    });
+                }
+            }
+
+            lat = parseFloat(lat / cnt); // 이 데이터를
+            lng = parseFloat(lng / cnt); // kakaoMap.vue로 넘겨주어야함
+            dongChange = this.$store.state.dongChange;
+            aptChange = aptName;
+
+            // store로 보내기
+            this.$store.commit("latVal", { lat });
+            this.$store.commit("lngVal", { lng });
+            this.$store.commit("isDongChange", { dongChange });
+            this.$store.commit("isAptChange", { aptChange });
             this.$store.commit("positions", { positions });
             this.$store.commit("aptList", { aptList });
         },

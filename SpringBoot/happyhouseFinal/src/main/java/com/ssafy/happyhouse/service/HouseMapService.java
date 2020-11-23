@@ -11,19 +11,21 @@ import com.ssafy.happyhouse.dto.HouseInfoDto;
 
 @Service
 public class HouseMapService {
-	
+
 	@Autowired
 	HouseMapDao dao;
-	
 
 	public List<HouseDealDto> getAptInDong(String dong) throws Exception {
 		return dao.getAptInDong(dong);
 	}
-	
-	public List<HouseInfoDto> getAptDetail(String aptdetail) throws Exception {
-		return dao.getAptDetail(aptdetail);
+
+	public List<HouseDealDto> getAptSearch(String[] info) throws Exception {
+//		return dao.getAptSearch(aptName);
+//		System.out.println("service1 " + info[0]);
+//		System.out.println("service2 " + info[1]);
+		return dao.getAptSearch(info);
 	}
-	
+
 	public HouseDealDto getDetail(String aptName, String dongCode) throws Exception {
 		return dao.getDetail(aptName, dongCode);
 	}

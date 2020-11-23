@@ -7,9 +7,10 @@ export default new Vuex.Store({
     state: {
         lat: 37.5743822,
         lng: 126.9688505,
-        change: '',
+        dongChange: '',
         positions: [],
         aptList: [],
+        aptChange: ''
     },
     mutations: {
         latVal(state, payload) {
@@ -18,8 +19,11 @@ export default new Vuex.Store({
         lngVal(state, payload) {
             state.lng = payload.lng;
         },
-        isChange(state, payload) {
-            state.change = payload.change;
+        isDongChange(state, payload) {
+            state.dongChange = payload.dongChange;
+        },
+        isAptChange(state, payload) {
+            state.aptChange = payload.aptChange;
         },
         positions(state, payload) {
             state.positions = payload.positions;
@@ -44,8 +48,11 @@ export default new Vuex.Store({
         getLng(state) {
             return state.lng;
         },
-        getChange(state) {
-            return state.change;
+        getDongChange(state) {
+            return state.dongChange;
+        },
+        getAptChange(state) {
+            return state.aptChange;
         },
     },
 });

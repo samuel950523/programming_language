@@ -3,10 +3,10 @@ package com.ssafy.happyhouse.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.ssafy.happyhouse.dto.HouseDealDto;
-import com.ssafy.happyhouse.dto.HouseInfoDto;
 
 @Mapper
 public interface HouseMapDao {
@@ -14,8 +14,9 @@ public interface HouseMapDao {
 	@Select("SELECT * from housedeal where dong = #{dong}")
 	List<HouseDealDto> getAptInDong(String dong) throws Exception;
 	
-	
-	List<HouseInfoDto> getAptDetail(String aptdetail) throws Exception;
+	@Select("SELECT * from housedeal where dong = #{info[0]} AND AptName LIKE CONCAT('%', #{info[1]}, '%')")
+	List<HouseDealDto> getAptSearch(@Param("info") String info[]) throws Exception;
+
 	HouseDealDto getDetail(String aptName, String dongCode) throws Exception;
 	
 //	@Insert("INSERT INTO todolist ( content , createdAt  )" +

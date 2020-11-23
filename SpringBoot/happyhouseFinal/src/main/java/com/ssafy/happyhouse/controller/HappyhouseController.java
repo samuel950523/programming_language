@@ -19,14 +19,32 @@ public class HappyhouseController {
 
 	@CrossOrigin(origins = "*")
 	@GetMapping("/getAptInDong")
-	public List<HouseDealDto> getAptInDong(@RequestParam(value="dongName", required=false) String dongName) throws Exception {
-		// .....		
-		
+	public List<HouseDealDto> getAptInDong(@RequestParam(value = "dongName", required = false) String dongName)
+			throws Exception {
+		// .....
+
 		System.out.println(dongName); // 동 출력
 
 		List<HouseDealDto> house = houseService.getAptInDong(dongName); // 동 이름을 넣어서 해당하는 apt list 반환
 
 		return house;
+	}
+
+	@CrossOrigin(origins = "*")
+	@GetMapping("/getAptSearch")
+	public List<HouseDealDto> getAptSearch(@RequestParam(value = "info", required = false) String[] info)
+			throws Exception {
+		// .....
+		// info = { 동 이름, 아파트 이름}
+		if (info != null) {
+//			System.out.println("controller1 " + info[0]); // 동 출력
+//			System.out.println("controller2 " + info[1]); // 아파트 이름 출력
+
+			List<HouseDealDto> house = houseService.getAptSearch(info);
+
+			return house;
+		} else
+			return null;
 	}
 //	
 //	@CrossOrigin(origins = "http://localhost:4000")
