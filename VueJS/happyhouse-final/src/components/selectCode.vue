@@ -161,6 +161,8 @@ export default {
             var lat = 0;
             var lng = 0;
             var cnt = 0;
+            var positions = [];
+
             for (let i = 0; i < loc.length; i++) {
                 if (loc[i].dong == dongName) {
                     lat += parseFloat(loc[i].lat);

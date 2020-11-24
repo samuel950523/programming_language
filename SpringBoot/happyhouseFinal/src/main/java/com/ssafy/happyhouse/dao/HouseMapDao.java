@@ -23,6 +23,7 @@ public interface HouseMapDao {
 //            "VALUES ( #{memo.content} , #{memo.createdAt} )")
 //	@Options(useGeneratedKeys = true, keyProperty = "memo.id", keyColumn = "id")
 //	public int save(@Param("memo") Memo memo);
+	// 회원 가입 / 로그인 / 정보 수정탈퇴
 //	
 //	@Select("SELECT * from todolist")
 //    public List<Memo> list();

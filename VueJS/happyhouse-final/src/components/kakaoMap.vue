@@ -7,6 +7,7 @@
 <script>
 import store from "../store/index.js";
 var map; //지도 생성 및 객체 리턴
+var mapTypeControl;
 // var markerPosition; // 마커
 export default {
     computed: {
@@ -44,6 +45,12 @@ export default {
             };
 
             map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+            mapTypeControl = new kakao.maps.MapTypeControl();
+
+            // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+            // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+            map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+            map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
         },
         setCenter(lat, lng) {
             // 이동할 위도 경도 위치를 생성합니다
@@ -118,6 +125,7 @@ export default {
             }
             // 지도 중심을 부드럽게 이동시킵니다
             // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+
             map.panTo(moveLatLon);
         },
         // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
@@ -127,6 +135,7 @@ export default {
         messageComputed: function () {
             if (store.state.dongChange && window.kakao && window.kakao.maps) {
                 if (store.state.lat) {
+                    this.initMap(); // 마커가 누적되지 않게 초기화
                     console.log(store.state.positions);
                     this.panTo(
                         store.state.lat,

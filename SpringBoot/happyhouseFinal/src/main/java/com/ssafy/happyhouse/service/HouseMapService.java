@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.ssafy.happyhouse.dao.HouseMapDao;
 import com.ssafy.happyhouse.dto.HouseDealDto;
-import com.ssafy.happyhouse.dto.HouseInfoDto;
 
 @Service
 public class HouseMapService {
