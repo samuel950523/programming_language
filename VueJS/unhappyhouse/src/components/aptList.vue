@@ -24,23 +24,25 @@
             </tbody>
         </table>
         <div class="btn-cover">
-            <button
+            <b-button
+                variant="outline-info"
                 :disabled="pageNum === 0"
                 @click="prevPage"
                 class="page-btn"
             >
                 이전
-            </button>
+            </b-button>
             <span class="page-count"
                 >{{ pageNum + 1 }} / {{ pageCount }} 페이지</span
             >
-            <button
+            <b-button
+                variant="outline-info"
                 :disabled="pageNum >= pageCount - 1"
                 @click="nextPage"
                 class="page-btn"
             >
                 다음
-            </button>
+            </b-button>
         </div>
     </div>
 </template>
