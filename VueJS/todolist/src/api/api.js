@@ -50,3 +50,15 @@ export const deleteMemo = (id) => {
         }
     })
 };
+export const showWeather = (params) => {
+    return new Promise((resolve) => {
+        try {
+            const result = axios.get(`http://127.0.0.1:8080/weather`, {
+                params: params
+            });
+            resolve(result);
+        } catch (error) {
+            resolve(false);
+        }
+    })
+};

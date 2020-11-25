@@ -1,20 +1,25 @@
 <template>
-    <div>
+<v-flex  xs6 sm8 md8 lg6 x12>
+    <div id = "test7">
    <!-- 텍스트 필드 -->
-   <v-textarea
-   outline
-   v-model="memo"
-   label = "투두리스트를 입력해주세요"
-   value="">
+   <v-textarea id = "test"
+    v-model="memo"
+    label = "========= ( ღ'ᴗ'ღ )  할 일을 추가해보세요  ( ღ'ᴗ'ღ ) ========="
+    background-color="amber lighten-4"
+    color="orange orange-darken-4"
+   >
    </v-textarea>
-   <v-btn v-if="mode === 'add'" @click="listAdd">리스트 추가 </v-btn>
-   <v-btn v-else @click="listEdit">리스트 수정 </v-btn>
     </div>
+
+   <v-btn rounded class="pink white--text" v-if="mode === 'add'" @click="listAdd" color="orange">할 일 추가( ღ'ᴗ'ღ ) </v-btn>
+   <v-btn rounded class="pink white--text" v-else @click="listEdit"  color="green">할 일 수정하기( ღ'ᴗ'ღ ) </v-btn>
+   
+</v-flex>    
 </template>
 
 <script>
 import {eventBus} from "../main"
-export default {
+export default {                    
     data(){
         return {
             memo : null,
@@ -55,3 +60,12 @@ export default {
     }
 }
 </script>
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap');
+  #test {
+    width : 30%;
+    font-family: 'Nanum Gothic Coding', monospace;
+    margin-top: 10px;
+    font-size: 5px;
+    }
+</style>

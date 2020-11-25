@@ -9,6 +9,9 @@ import Me from '../views/Me.vue';
 import Join from '../views/Join.vue';
 import Footer from '../views/Footer.vue';
 import store from '../store';
+import Board_ from '../views/Board.vue';
+import BoardCreate_ from '../views/BoardCreate.vue';
+import BoardEdit_ from '../views/BoardEdit.vue';
 
 Vue.use(VueRouter);
 
@@ -77,12 +80,30 @@ export default new VueRouter({
             },
         },
         {
-            path: '/map',
+            path: '/board',
             components: {
                 NavBar: NavBar,
-                default: Map_,
-                Footer: Footer,
+                default: Board_,
+                Footer: Footer
+            }
+        },
+        {
+            path: '/boardCreate',
+            components: {
+                NavBar: NavBar,
+                default: BoardCreate_,
+                Footer: Footer
             },
         },
+        {
+            path: '/boardEdit',
+            name: 'BoardEdit_',
+            components: {
+                NavBar: NavBar,
+                default: BoardEdit_,
+                Footer: Footer
+            },
+        },
+
     ],
 });

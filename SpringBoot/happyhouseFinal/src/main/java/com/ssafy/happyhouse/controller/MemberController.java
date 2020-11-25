@@ -13,13 +13,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.happyhouse.dto.MemberDto;
+import com.ssafy.happyhouse.dto.Notice;
 import com.ssafy.happyhouse.service.JwtService;
 import com.ssafy.happyhouse.service.MemberService;
 
@@ -116,12 +120,27 @@ public class MemberController {
 
 	@CrossOrigin(origins = "*")
 	@PostMapping("/join")
-	public int join ( @RequestBody String[] info) {
+	public int join ( @RequestBody MemberDto memberDto) {
 		
 		System.out.println("회원가입");
-		int result = memberService.join(info);
+		System.out.println(memberDto.getUserName());
+		int result = memberService.join(memberDto);
 		System.out.println(result);
 		return result;
+	}
+	
+	@CrossOrigin(origins = "*")
+	@PutMapping("/editlogin")
+	public void noticeUpdate (@RequestBody MemberDto memberDto) {
+		
+		System.out.println("dd"+" "+memberDto.getUserPassword() +" "+ memberDto.getUserEmail() + " " + memberDto.getUserName() + " now controller");
+		memberService.update(memberDto);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4000")
+	@DeleteMapping("/editdelete/{id}")
+	public void loginDelete (@PathVariable int id) {
+		memberService.delete(id);
 	}
 	
 }

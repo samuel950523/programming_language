@@ -1,8 +1,12 @@
 <template>
     <div>
         <form>
-            <label class="badge badge-secondary">시</label>
-            <select @change="sidoChange($event)" id="sido">
+            <label class="badge badge-dark">시</label>
+            <select
+                @change="sidoChange($event)"
+                id="sido"
+                class="content search search_city"
+            >
                 <option value="0">선택</option>
                 <option value="11">서울특별시</option>
                 <option value="26">부산광역시</option>
@@ -24,8 +28,12 @@
             </select>
             <br />
             <br />
-            <label class="badge badge-secondary">군 / 구</label>
-            <select @change="gugunChange($event)" id="gugun">
+            <label class="badge badge-dark">군 / 구</label>
+            <select
+                @change="gugunChange($event)"
+                id="gugun"
+                class="content search search_gu"
+            >
                 <option
                     v-for="(gugun, gugun_code) in gugunList"
                     :value="gugun_code"
@@ -36,8 +44,12 @@
             </select>
             <br />
             <br />
-            <label class="badge badge-secondary">동</label>
-            <select @change="isDongChange($event)" id="dong">
+            <label class="badge badge-dark">동</label>
+            <select
+                @change="isDongChange($event)"
+                id="dong"
+                class="content search search_dong"
+            >
                 <option
                     v-for="(dong, dongcode) in dongList"
                     :value="dongcode"
@@ -46,8 +58,13 @@
                     {{ dong.dong }}
                 </option>
             </select>
-            <label class="badge badge-secondary">아파트이름</label>
-            <input type="text" @input="aptSearch($event)" id="aptSearch" />
+            <label class="badge badge-dark">아파트이름</label>
+            <input
+                type="text"
+                @input="aptSearch($event)"
+                id="aptSearch"
+                style="50px 20px 0 50px"
+            />
             <br />
         </form>
     </div>

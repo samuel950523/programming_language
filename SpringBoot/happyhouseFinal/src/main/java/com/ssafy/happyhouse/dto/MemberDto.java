@@ -1,13 +1,14 @@
 package com.ssafy.happyhouse.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class MemberDto {
 	private int userSeq;
 	private String userName;
 	private String userPassword;
 	private String userEmail;
-	private String userRegisterDate;
+//	private String userRegisterDate;
+	LocalDate userRegisterDate = LocalDate.now();
 
 	public int getUserSeq() {
 		return userSeq;
@@ -41,11 +42,11 @@ public class MemberDto {
 		this.userEmail = userEmail;
 	}
 
-	public String getUserRegisterDate() {
+	public LocalDate getUserRegisterDate() {
 		return userRegisterDate;
 	}
 
-	public void setUserRegisterDate(String userRegisterDate) {
+	public void setUserRegisterDate(LocalDate userRegisterDate) {
 		this.userRegisterDate = userRegisterDate;
 	}
 

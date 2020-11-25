@@ -77,7 +77,6 @@ export default {
             user: {
                 userName: "",
                 userPassword: "",
-                userPassword2: "",
                 userEmail: "",
             },
             message: "",
@@ -89,10 +88,15 @@ export default {
             const Join = (user) => {
                 return new Promise((resolve) => {
                     try {
+                        axios.defaults.headers.post[
+                            "Access-Control-Allow-Origin"
+                        ] = "*";
                         const result = axios.post(
-                            `http://127.0.0.1:8080/join`,
+                            `http://127.0.0.1:8080/user/join`,
                             {
-                                user:user
+                                userName: user.userName,
+                                userPassword: user.userPassword,
+                                userEmail: user.userEmail,
                             }
                         );
                         console.log(1111);

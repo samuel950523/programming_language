@@ -21,6 +21,14 @@
                         </b-row>
                         <b-row>
                             <b-col cols="2"></b-col>
+                            <b-col cols="2" align-self="end">비밀번호</b-col
+                            ><b-col cols="4" align-self="start">{{
+                                user.userPassword
+                            }}</b-col>
+                            <b-col cols="2"></b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col cols="2"></b-col>
                             <b-col cols="2" align-self="end">이메일</b-col
                             ><b-col cols="4" align-self="start">{{
                                 user.userEmail
@@ -32,7 +40,11 @@
                             <b-col cols="2"></b-col>
                             <b-col cols="2" align-self="end">가입일</b-col
                             ><b-col cols="4" align-self="start">{{
-                                user.userRegisterDate
+                                user.userRegisterDate.year +
+                                "." +
+                                user.userRegisterDate.monthValue +
+                                "." +
+                                user.userRegisterDate.dayOfMonth
                             }}</b-col>
                             <b-col cols="2"></b-col>
                         </b-row>

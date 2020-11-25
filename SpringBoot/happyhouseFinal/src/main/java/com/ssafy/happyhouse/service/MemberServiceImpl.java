@@ -16,7 +16,7 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDto login(MemberDto memberDto) throws Exception {
 		System.out.println(memberDto.getUserName()); // 제대로 뜸
 //		System.out.println(memberDto.getUserPassword());
-		System.out.println(dao.login(memberDto.getUserName())); // dao갔다오면 null
+		System.out.println(dao.login(memberDto.getUserName()).getUserRegisterDate()); // dao갔다오면 null
 		return dao.login(memberDto.getUserName());
 	}
 
@@ -26,11 +26,22 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int join(String[] info) {
+	public int join(MemberDto memberDto) {
 		System.out.println("this is join service");
-		int get = dao.join(info);
+		System.out.println(memberDto.getUserName());
+		int get = dao.join(memberDto);
 		System.out.println(get);
 		return get;
+	}
+	
+	@Override
+	public void update(MemberDto memberDto) {
+		System.out.println(memberDto.getUserName() + " now service");
+		dao.loginUpdate(memberDto);
+	}
+	
+	public void delete(int id) {
+		dao.loginDelete(id);
 	}
 
 }
