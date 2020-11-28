@@ -1,2 +1,2 @@
 # Programming_Language
-Java / Python
+Java / Python / SQL / Vue
